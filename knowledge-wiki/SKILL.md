@@ -9,7 +9,7 @@ A knowledge wiki is a **compounding artifact**: each source you ingest doesn't j
 
 1. **Raw sources** — the immutable collection (PDFs, articles, transcripts). Source of truth; the wiki never edits these, only reads from them.
 2. **The bundle** — the wiki itself: a directory of markdown files with YAML frontmatter, conformant to the Open Knowledge Format (OKF, see Reference below). You own this layer entirely.
-3. **The schema** — this skill plus the project's own AGENTS.md/AGENTS.md/rules files. It records domain-specific conventions (naming, node templates, what counts as a "finding" vs a "gap") and should co-evolve with the user as the domain's needs become clear. Don't try to author the domain schema yourself on the first pass — propose it, then let usage refine it.
+3. **The schema** — this skill plus the project's own CLAUDE.md / AGENTS.md / rules files. It records domain-specific conventions (naming, node templates, what counts as a "finding" vs a "gap") and should co-evolve with the user as the domain's needs become clear. Don't try to author the domain schema yourself on the first pass — propose it, then let usage refine it.
 
 ## Setting up a new bundle
 
