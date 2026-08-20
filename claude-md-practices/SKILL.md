@@ -1,0 +1,45 @@
+---
+name: Codex-md-practices
+description: Standard for writing lean AGENTS.md and .Codex/rules/*.md files. Use when writing or editing AGENTS.md, .Codex/rules/, .Codex/project/ trackers, or migrating .cursor/rules/*.mdc to .Codex/.
+---
+
+## Operating principle
+
+Every line in an agent-loaded file (`AGENTS.md`, `.Codex/rules/*.md`) must be
+**load-bearing**: would an agent get this wrong without this line, on a
+typical task in this repo? No — cut it, push it to an on-demand rule file, or
+trust exploration. All rules below are this test applied to a specific case.
+
+## Rules
+
+- **No prose, no tables in agent-loaded files.** Flat bullets only. Tables are
+  fine in `.Codex/project/*.md` trackers — there, a row is a tracked item
+  with a status field, i.e. data, not exposition.
+- **Omit volatile detail** — hyperparameter values, exact counts, dates, PR
+  numbers, run counts. If code/config/manuscript already carries the value,
+  don't shadow it in a rule file.
+- **Omit the inferable** — standard directory layout, common library usage.
+  Trust exploration over spelling it out.
+- **No glob-loading.** `AGENTS.md` has no `.mdc`-style conditional loading.
+  Instead: a few always-active `@import`s, plus a plain-bullet index of the
+  rest ("read `X.md` when doing Y") — read on demand, never auto-loaded.
+- **Changelog entries are milestones, not commits.** 1-3 lines. If an entry
+  names a specific function, file, or formula, that content belongs in the
+  commit body, not the changelog — git log already carries it.
+- **No volatile numbers in illustrative examples.** Abstract phrasing
+  ("run count increases") over a real snapshot value ("195→201") — the
+  example outlives the number.
+- **Single source of truth.** One fact lives in one file; every other
+  agent-loaded file links to it rather than restating it.
+- **Rules vs. registries are different homes.** `.Codex/rules/` holds stable
+  instructions that rarely change. `.Codex/project/*.md` holds trackers
+  expected to change — tables belong there.
+- **Plain-heading frontmatter for new or migrated rule files.** No Cursor-era
+  YAML (`description`/`globs`/`alwaysApply`) — that shape existed for
+  glob-based auto-loading, which flat `AGENTS.md` doesn't do.
+
+## Exemption
+
+`README.md` is human-facing GitHub onboarding, not agent-loaded. Restating a
+pointer there that also lives in `AGENTS.md` is not a single-source-of-truth
+violation — don't gut a README to satisfy this skill.
