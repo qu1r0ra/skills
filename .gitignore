@@ -1,4 +1,6 @@
 .DS_Store
+__pycache__/
+*.pyc
 
 # BEGIN SKILLSHARE MANAGED - DO NOT EDIT
 _adversarial-review-agy/
