@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "entries": {
+    "_adversarial-review-agy": {
+      "source": "https://github.com/qu1r0ra/adversarial-review-agy.git",
+      "tracked": true,
+      "branch": "main",
+      "file_hashes": {
+        "LENSES.md": "sha256:1b4b85c21fabf63eb7c5b4334b452b288a15c67dfd080c537d57c3bca44fa5b3",
+        "LICENSE": "sha256:fe16ba6cb132c077196ec886e6a53fc17ea59fa72258e6d1d50b695467969d06",
+        "README.md": "sha256:d8b99b809a9f3308a23b08212b13b70373a0443527b51732993134ee656de85a",
+        "SKILL.md": "sha256:63536a115812ab6b609ccc91f64ef1d7714ef0f3f226aad5ca037dc203626a46"
+      }
+    },
+    "_sync-matt": {
+      "source": "https://github.com/qu1r0ra/sync-matt.git",
+      "tracked": true,
+      "branch": "main",
+      "file_hashes": {
+        ".gitignore": "sha256:c4c4bc241387f2e62e0914605578e5aee4c92e777f74cc9deb8825fb05c900bc",
+        "LICENSE": "sha256:268aacd45489e04c820447285710b94a48a835a1ae1095a1299385d407a0400e",
+        "README.md": "sha256:abf916ec3613918237d88359498e87acaab6bc323f0567771a7108af1280c176",
+        "SKILL.md": "sha256:d69b75a9975a2446808721a7793a81f73c2271a4d3d3eb23d48eb2adab96b9e3",
+        "tests/test_sync_skill.py": "sha256:663d62387ba7ef63bc028c2c9b1db375b4964d282711aa1e65cf58a7e8f9d9da"
+      }
+    }
+  }
+}
