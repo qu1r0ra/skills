@@ -29,19 +29,22 @@ overriding the task, evidence, audience, or required house style.
    rendered artifact whenever its formatting, cross-references, tables,
    figures, or template behavior affects the result.
 7. For every substantive prose draft, review, or revision, invoke the
-   `humanizer` skill after loading this bundle and the applicable mode. Use
-   Humanizer's embedded mode for this internal pass, so this workflow receives
-   only the final prose. For a direct user request to inspect Humanizer's
-   patterns or humanize pasted text, preserve Humanizer's normal pasted-text
-   output instead. Humanizer owns the generic anti-formulaic catalogue; do not
+   `humanizer` skill after loading this bundle and the applicable mode. Treat
+   Humanizer as the final editorial task before delivery. Use Humanizer's
+   embedded mode for this internal pass, so this workflow receives only the
+   final prose. For a direct user request to inspect Humanizer's patterns or
+   humanize pasted text, preserve Humanizer's normal pasted-text output
+   instead. Humanizer owns the generic anti-formulaic catalogue; do not
    reproduce or maintain that catalogue here.
-8. Apply Humanizer only within the conflict order above and the active writing
-   mode. Its claim-preservation rule is a default, not a ban on correction:
+8. Run the Humanizer pass only after the substantive draft and applicable
+   evidence checks are complete. Apply Humanizer within the conflict order
+   above and the active writing mode. Its claim-preservation rule is a
+   default, not a ban on correction:
    when supplied or verified evidence shows that a fact, citation, quotation,
    or link target is wrong, correct it and surface any material correction.
-   Never invent a replacement fact or citation. If the required Humanizer pass
-   is unavailable, do not claim this workflow is complete; report the missing
-   pass.
+   Never invent a replacement fact or citation. If the required final Humanizer
+   pass is unavailable, do not claim this workflow is complete; report the
+   missing pass.
 9. Preserve quotations, citations, equations, code, metadata, data, link
    targets, technical terms, author-approved stance, and policy-required
    disclosures unless the user explicitly asks to change them or evidence
