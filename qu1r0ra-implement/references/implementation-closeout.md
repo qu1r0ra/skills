@@ -13,8 +13,8 @@ implementation contract and issue-tracker instructions.
 
 The implementation worktree must be clean, registered, and on the exact issue
 branch. The implementation must have a committed receipt with scoped checks,
-full-suite evidence or an explicit exception, review-pair count, and remaining
-gates.
+full-suite evidence or an explicit exception, review-round/pair count,
+repair/re-review history, and remaining gates.
 
 Completion: all identities resolve to the intended repository, ticket, branch,
 worktree, and delivery mode.
@@ -86,8 +86,9 @@ deleted branch is identified in the receipt.
 ## Update and close tickets
 
 Update the primary implementation ticket with the implementation commits,
-merge or pull-request SHA, verification evidence, review-pair count,
-publication result, cleanup result, and remaining gates. Update directly
+merge or pull-request SHA, verification evidence, review-round/pair count,
+repair/re-review history, publication result, cleanup result, and remaining
+gates. Update directly
 affected blockers or dependents only when their state changed.
 
 Close the ticket only when its acceptance evidence is complete and no human or

@@ -1,5 +1,5 @@
 interface:
   display_name: "qu1r0ra Implement"
-  short_description: "Implement work with bounded review and verified closeout"
+  short_description: "Implement work with up to four bounded review rounds and verified closeout"
 policy:
   allow_implicit_invocation: false

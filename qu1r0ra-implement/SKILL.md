@@ -53,18 +53,27 @@ supervising agent on its current model. Treat an unavailable or rejected
 Gemini Flash 3.8 dispatch as a failed worker lane; continue in the parent only
 when the harness permits that fallback, and record it in the receipt.
 
-Count complete Standards+Spec reviewer pairs for the ticket:
+Count complete Standards+Spec reviewer pairs as review rounds for the ticket.
+The round budget is global, including re-review after a repair:
 
-- Pair 1 and Pair 2 are the normal budget.
-- Pair 3 is one pre-authorized emergency pair only when the first two pairs
-  leave unresolved critical risk, materially conflict on a critical path, or
-  leave a critical review lane unavailable.
-- Record the emergency trigger before dispatching Pair 3.
-- Pair 4 is outside this workflow. Do not silently create replacement pairs.
+- Rounds 1 through 3 are allowed review rounds. Reuse the last pair for
+  back-and-forth repair/re-review when continuity is useful, and count each
+  completed re-review as the next round rather than silently resetting the
+  budget.
+- After a round reports a P1, repair the finding and re-review the changed
+  scope before declaring completion. A round is complete only when both axes
+  return their bounded report.
+- Round 4 is one backup round after the three-round budget, authorized only
+  when Round 3 still has an unresolved P1, or when a critical review lane was
+  unavailable or materially conflicted during the allowed rounds. Record the
+  trigger and the repair/re-review history before dispatching Round 4.
+- If a P1 remains after Round 4, stop the review loop and report the named
+  unresolved risk for human or owner intervention. Do not dispatch Round 5 or
+  silently create replacement pairs.
 
-Completion: the receipt states the number of review pairs used, the resolved
-model and reasoning effort for every Codex or Antigravity worker, and, for
-Pair 3, the emergency trigger.
+Completion: the receipt states the total review-round/pair count, the resolved
+model and reasoning effort for every Codex or Antigravity worker, each repair
+and re-review trigger, the final P1 disposition, and any Round 4 trigger.
 
 ## 3. Complete the implementation closeout
 
