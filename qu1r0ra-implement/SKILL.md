@@ -14,7 +14,7 @@ stable review, harness, and delivery policy.
 
 Read and follow the current upstream skill at:
 
-`C:\Users\Quirora\AppData\Roaming\skillshare\skills\implement\SKILL.md`
+`C:\Users\Quirora\Documents\qu1r0raOS\agent-skills\skills\implement\SKILL.md`
 
 Treat that file as upstream-owned. Do not edit or replace it. Complete its
 implementation, testing, review, and commit steps before proceeding.
@@ -80,7 +80,7 @@ and re-review trigger, the final P1 disposition, and any Round 4 trigger.
 After the implementation commit and review, apply the shared closeout procedure
 at:
 
-`C:\Users\Quirora\AppData\Roaming\skillshare\skills\qu1r0ra-implement\references\implementation-closeout.md`
+`C:\Users\Quirora\Documents\qu1r0raOS\agent-skills\skills\qu1r0ra-implement\references\implementation-closeout.md`
 
 Do not stop at “committed and reviewed” and ask the user to repeat the landing
 request. Unless the user explicitly requested handoff-only retention, continue
