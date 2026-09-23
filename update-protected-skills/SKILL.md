@@ -18,4 +18,10 @@ Use the updater at `scripts/manage.py` for skills listed under `protected_upstre
 
 The manifest is the designation list; same-name matches alone do not qualify. Local behavior belongs in a separate wrapper or fork. An exception must identify the exact skill, current directory hash, and reason, so a later edit invalidates it. A source deletion or rename requires approval tied to the exact fetched commit. Never turn an audit failure, unexplained drift, or missing projection into an accepted update.
 
+`adopt` can designate a skill from a non-default repository subtree with
+`--source-root PATH`. Use `--commit SHA` only to record an already-installed
+copy at a known historical revision; the full commit must exist and be an
+ancestor of the fetched branch tip. Subsequent previews and updates follow the
+recorded source root and branch.
+
 The updater runs fixed Git and SkillShare commands with argument arrays and no shell. It treats fetched files as data, accepts only regular files, rejects paths that collide or cannot be represented distinctly on Windows, and audits each changed directory before replacing its canonical copy.

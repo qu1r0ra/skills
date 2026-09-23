@@ -100,7 +100,13 @@ def protected(metadata: dict[str, Any], *, required: bool = True) -> dict[str, A
             raise Blocked(f"Protected skill {name} has an invalid source path")
         if not isinstance(entry["commit"], str) or not re.fullmatch(r"[0-9a-f]{40}", entry["commit"]):
             raise Blocked(f"Protected skill {name} has an invalid adopted commit")
-        safe_rel(entry["source_path"])
+        source_path = safe_rel(entry["source_path"])
+        source_root = entry.get("source_root", "skills")
+        if not isinstance(source_root, str):
+            raise Blocked(f"Protected skill {name} has an invalid source root")
+        source_root = safe_rel(source_root)
+        if not source_path.startswith(source_root + "/"):
+            raise Blocked(f"Protected skill {name} source path is outside its source root")
         if not isinstance(entry["tree_hash"], str) or not re.fullmatch(r"sha1:[0-9a-f]{40}", entry["tree_hash"]):
             raise Blocked(f"Protected skill {name} has an invalid source tree hash")
         if not isinstance(entry["file_hashes"], dict):
@@ -222,15 +228,22 @@ def source_files(root: Path, commit: str, source_path: str) -> tuple[dict[str, b
     return files, "sha1:" + tree_result.stdout.strip()
 
 
-def source_skill_paths(root: Path, commit: str) -> dict[str, str]:
-    raw = subprocess.run(["git", "ls-tree", "-r", "-z", "--name-only", commit, "--", "skills"], cwd=root, capture_output=True, check=False)
+def source_skill_paths(root: Path, commit: str, source_root: str = "skills") -> dict[str, str]:
+    source_root = safe_rel(source_root)
+    raw = subprocess.run(["git", "ls-tree", "-r", "-z", "--name-only", commit, "--", source_root], cwd=root, capture_output=True, check=False)
     if raw.returncode:
-        raise Blocked(f"Could not list upstream skills at {commit}")
+        raise Blocked(f"Could not list upstream skills under {source_root} at {commit}")
     found: dict[str, str] = {}
+    prefix = source_root.rstrip("/") + "/"
     for item in raw.stdout.split(b"\0"):
         if not item:
             continue
-        path = item.decode("utf-8")
+        try:
+            path = item.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise Blocked("Upstream skill path is not valid UTF-8") from exc
+        if not path.startswith(prefix):
+            continue
         if not path.endswith("/SKILL.md"):
             continue
         directory = path.rsplit("/", 1)[0]
@@ -289,9 +302,9 @@ def file_map(files: dict[str, bytes]) -> dict[str, str]:
     return {name: sha256_bytes(content) for name, content in sorted(files.items())}
 
 
-def skill_entry(url: str, branch: str, source_path: str, commit: str, tree_hash: str, files: dict[str, bytes]) -> dict[str, Any]:
+def skill_entry(url: str, branch: str, source_path: str, commit: str, tree_hash: str, files: dict[str, bytes], source_root: str = "skills") -> dict[str, Any]:
     hashes = file_map(files)
-    return {
+    entry = {
         "source": url,
         "branch": branch,
         "source_path": source_path,
@@ -301,6 +314,9 @@ def skill_entry(url: str, branch: str, source_path: str, commit: str, tree_hash:
         "file_hashes": hashes,
         "approved_changes": [],
     }
+    if source_root != "skills":
+        entry["source_root"] = safe_rel(source_root)
+    return entry
 
 
 def git_metadata_path(root: Path, name: str) -> Path:
@@ -412,8 +428,19 @@ def cmd_adopt(root: Path, args: argparse.Namespace) -> None:
     branch = args.branch
     if not valid_source(source_url):
         raise Blocked("Upstream source must be an HTTPS URL without embedded credentials or query data")
-    commit = fetch(root, source_url, branch)
-    paths = source_skill_paths(root, commit)
+    tip = fetch(root, source_url, branch)
+    commit = tip
+    if args.commit:
+        if not re.fullmatch(r"[0-9a-f]{40}", args.commit):
+            raise Blocked("An adopted historical commit must be a full 40-character SHA")
+        resolved = git(root, "rev-parse", "--verify", f"{args.commit}^{{commit}}", check=False)
+        if resolved.returncode or resolved.stdout.strip() != args.commit:
+            raise Blocked(f"Adopted commit is unavailable: {args.commit}")
+        if not upstream_is_ancestor(root, args.commit, tip):
+            raise Blocked(f"Adopted commit {args.commit} is not an ancestor of fetched {branch} tip {tip}")
+        commit = args.commit
+    source_root = safe_rel(args.source_root)
+    paths = source_skill_paths(root, commit, source_root)
     new_entries = dict(manifest["skills"])
     with tempfile.TemporaryDirectory(prefix="protected-skill-audit-") as temporary:
         temp_root = Path(temporary)
@@ -429,9 +456,10 @@ def cmd_adopt(root: Path, args: argparse.Namespace) -> None:
             if local != hashes:
                 raise Blocked(f"Cannot adopt {name}: canonical content does not match {source_url}@{commit}:{source_path}")
             audit_snapshot(name, files, temp_root)
-            new_entries[name] = skill_entry(source_url, branch, source_path, commit, tree_hash, files)
+            new_entries[name] = skill_entry(source_url, branch, source_path, commit, tree_hash, files, source_root)
             print(f"Adopted {name}: {source_path} at {commit[:12]}")
-    metadata[MANIFEST_KEY] = {"version": VERSION, "skills": dict(sorted(new_entries.items()))}
+    manifest.update({"version": VERSION, "skills": dict(sorted(new_entries.items()))})
+    metadata[MANIFEST_KEY] = manifest
     write_metadata(root, metadata)
     print(f"Recorded {len(args.skills)} designated skill(s) in .metadata.json.")
 
@@ -481,16 +509,16 @@ def cmd_clear_exception(root: Path, args: argparse.Namespace) -> None:
 
 def cmd_preview(root: Path, skill: str | None) -> None:
     manifest = protected(load_metadata(root))
-    groups: dict[tuple[str, str], list[tuple[str, dict[str, Any]]]] = {}
+    groups: dict[tuple[str, str, str], list[tuple[str, dict[str, Any]]]] = {}
     for name, entry in manifest["skills"].items():
         if skill is None or skill == name:
-            groups.setdefault((entry["source"], entry["branch"]), []).append((name, entry))
+            groups.setdefault((entry["source"], entry["branch"], entry.get("source_root", "skills")), []).append((name, entry))
     if skill is not None and not groups:
         raise Blocked(f"Skill is not designated: {skill}")
-    for (url, branch), entries in groups.items():
+    for (url, branch, source_root), entries in groups.items():
         candidate = fetch(root, url, branch)
-        paths = source_skill_paths(root, candidate)
-        print(f"Source {url} branch {branch} at {candidate}")
+        paths = source_skill_paths(root, candidate, source_root)
+        print(f"Source {url} branch {branch}, skill root {source_root}, at {candidate}")
         for name, entry in entries:
             new_path = paths.get(name)
             print(f"\n=== {name}: {entry['commit']} -> {candidate} ===")
@@ -567,18 +595,18 @@ def cmd_update(root: Path) -> None:
         path = receipt(root, "blocked-drift", {"failures": local_failures})
         raise Blocked("\n".join(local_failures) + f"\nReceipt: {path}")
 
-    groups: dict[tuple[str, str], list[tuple[str, dict[str, Any]]]] = {}
+    groups: dict[tuple[str, str, str], list[tuple[str, dict[str, Any]]]] = {}
     for name, entry in manifest["skills"].items():
-        groups.setdefault((entry["source"], entry["branch"]), []).append((name, entry))
+        groups.setdefault((entry["source"], entry["branch"], entry.get("source_root", "skills")), []).append((name, entry))
 
     proposals: dict[str, tuple[dict[str, Any], dict[str, bytes], bool]] = {}
     retirements: dict[str, dict[str, Any]] = {}
     blocked: list[str] = []
     with tempfile.TemporaryDirectory(prefix="protected-skill-audit-") as temporary:
         temp_root = Path(temporary)
-        for (url, branch), entries in groups.items():
+        for (url, branch, source_root), entries in groups.items():
             candidate = fetch(root, url, branch)
-            paths = source_skill_paths(root, candidate)
+            paths = source_skill_paths(root, candidate, source_root)
             for name, entry in entries:
                 exception = entry.get("local_exception")
                 local_hash = directory_hash(local_snapshot(root / name))
@@ -591,7 +619,7 @@ def cmd_update(root: Path) -> None:
                     if file_map(files) != entry["file_hashes"]:
                         blocked.append(f"{name}: clear its local exception and restore upstream form before applying changed upstream content")
                         continue
-                    updated = skill_entry(url, branch, source_path, candidate, tree_hash, files)
+                    updated = skill_entry(url, branch, source_path, candidate, tree_hash, files, source_root)
                     updated["local_exception"] = exception
                     proposals[name] = (updated, files, False)
                     continue
@@ -629,7 +657,7 @@ def cmd_update(root: Path) -> None:
                         reason.append("upstream history was rewritten")
                     blocked.append(f"{name}: {'; '.join(reason)}; review and approve exact commit {candidate}")
                     continue
-                updated = skill_entry(url, branch, source_path, candidate, tree_hash, files)
+                updated = skill_entry(url, branch, source_path, candidate, tree_hash, files, source_root)
                 updated["approved_changes"] = [item for item in entry.get("approved_changes", []) if item.get("commit") != candidate]
                 content_changed = updated["directory_hash"] != entry["directory_hash"]
                 if content_changed:
@@ -728,6 +756,8 @@ def parser() -> argparse.ArgumentParser:
     adopt = sub.add_parser("adopt", help="record source identity and hashes for explicitly selected skills")
     adopt.add_argument("--source-url", required=True)
     adopt.add_argument("--branch", default="main")
+    adopt.add_argument("--source-root", default="skills", help="directory containing skill directories in the upstream repository")
+    adopt.add_argument("--commit", help="full source commit to adopt; must be an ancestor of the fetched branch tip")
     adopt.add_argument("--skills", nargs="+", required=True)
     sub.add_parser("check", help="check canonical and configured projection hashes")
     preview = sub.add_parser("preview", help="show exact upstream diff against a fetched branch tip")
