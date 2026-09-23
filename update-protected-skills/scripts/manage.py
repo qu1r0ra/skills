@@ -319,6 +319,52 @@ def skill_entry(url: str, branch: str, source_path: str, commit: str, tree_hash:
     return entry
 
 
+def import_record_needs_update(metadata: dict[str, Any], name: str, prior: dict[str, Any], updated: dict[str, Any]) -> bool:
+    imports = metadata.get("entries")
+    if not isinstance(imports, dict):
+        return False
+    record = imports.get(name)
+    if not isinstance(record, dict) or record.get("type") != "github-subdir":
+        return False
+    if record.get("repo_url") != prior["source"] or record.get("subdir") != prior["source_path"]:
+        return False
+    source_label_needs_update = False
+    if prior["source_path"] != updated["source_path"]:
+        label = record.get("source")
+        old_suffix = "/" + prior["source_path"]
+        source_label_needs_update = not isinstance(label, str) or not label.endswith(old_suffix)
+        if not source_label_needs_update:
+            expected = label[:-len(prior["source_path"])] + updated["source_path"]
+            source_label_needs_update = label != expected
+    return source_label_needs_update or any((
+        record.get("subdir") != updated["source_path"],
+        record.get("version") != updated["commit"][:7],
+        record.get("tree_hash") != updated["tree_hash"].removeprefix("sha1:"),
+        record.get("file_hashes") != updated["file_hashes"],
+    ))
+
+
+def refresh_import_record(metadata: dict[str, Any], name: str, prior: dict[str, Any], updated: dict[str, Any]) -> None:
+    imports = metadata.get("entries")
+    if not isinstance(imports, dict):
+        return
+    record = imports.get(name)
+    if not isinstance(record, dict) or record.get("type") != "github-subdir":
+        return
+    if record.get("repo_url") != prior["source"] or record.get("subdir") != prior["source_path"]:
+        return
+    if prior["source_path"] != updated["source_path"]:
+        label = record.get("source")
+        old_suffix = "/" + prior["source_path"]
+        if not isinstance(label, str) or not label.endswith(old_suffix):
+            raise Blocked(f"Cannot update SkillShare source label for {name} after its approved upstream path change")
+        record["source"] = label[:-len(prior["source_path"])] + updated["source_path"]
+    record["subdir"] = updated["source_path"]
+    record["version"] = updated["commit"][:7]
+    record["tree_hash"] = updated["tree_hash"].removeprefix("sha1:")
+    record["file_hashes"] = updated["file_hashes"]
+
+
 def git_metadata_path(root: Path, name: str) -> Path:
     value = git(root, "rev-parse", "--git-path", name).stdout.strip()
     path = Path(value)
@@ -456,7 +502,9 @@ def cmd_adopt(root: Path, args: argparse.Namespace) -> None:
             if local != hashes:
                 raise Blocked(f"Cannot adopt {name}: canonical content does not match {source_url}@{commit}:{source_path}")
             audit_snapshot(name, files, temp_root)
-            new_entries[name] = skill_entry(source_url, branch, source_path, commit, tree_hash, files, source_root)
+            adopted = skill_entry(source_url, branch, source_path, commit, tree_hash, files, source_root)
+            refresh_import_record(metadata, name, adopted, adopted)
+            new_entries[name] = adopted
             print(f"Adopted {name}: {source_path} at {commit[:12]}")
     manifest.update({"version": VERSION, "skills": dict(sorted(new_entries.items()))})
     metadata[MANIFEST_KEY] = manifest
@@ -559,6 +607,11 @@ def ahead_count(root: Path) -> int:
         return 0
     counts = git(root, "rev-list", "--left-right", "--count", f"{upstream.stdout.strip()}...HEAD").stdout.split()
     return int(counts[1])
+
+
+def canonical_skill_tracked(root: Path, name: str) -> bool:
+    result = git(root, "ls-files", "--error-unmatch", "--", f"{name}/SKILL.md", check=False)
+    return result.returncode == 0
 
 
 def assert_publishable(root: Path, changed: list[str]) -> None:
@@ -667,8 +720,9 @@ def cmd_update(root: Path) -> None:
         path = receipt(root, "blocked-upstream-review", {"failures": blocked})
         raise Blocked("\n".join(blocked) + f"\nReceipt: {path}")
 
-    changed_skills = [name for name, (_, _, changed) in proposals.items() if changed]
-    metadata_changed = bool(retirements) or any(manifest["skills"][name] != updated for name, (updated, _, _) in proposals.items())
+    changed_skills = [name for name, (_, _, changed) in proposals.items() if changed or not canonical_skill_tracked(root, name)]
+    import_metadata_changed = any(import_record_needs_update(metadata, name, manifest["skills"][name], updated) for name, (updated, _, _) in proposals.items())
+    metadata_changed = bool(retirements) or import_metadata_changed or any(manifest["skills"][name] != updated for name, (updated, _, _) in proposals.items())
     if not changed_skills and not metadata_changed:
         print(f"Upstream branches are current: {len(manifest['skills'])} designated skills checked.")
         cmd_check(root)
@@ -692,6 +746,9 @@ def cmd_update(root: Path) -> None:
             backups[name] = backup
             replaced.append(name)
             os.replace(stage, current)
+        for name, (updated, _, _) in proposals.items():
+            prior = manifest["skills"][name]
+            refresh_import_record(metadata, name, prior, updated)
             manifest["skills"][name] = updated
         for name, retired in retirements.items():
             manifest["skills"].pop(name)
@@ -776,6 +833,10 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure:
+            reconfigure(errors="backslashreplace")
     args = parser().parse_args()
     root = args.root.resolve()
     try:
