@@ -1,10 +1,10 @@
 ---
-name: ask-qu1rora
+name: ask-qu1r0ra
 description: Choose a local idea-management flow or route engineering work to Ask Matt.
 disable-model-invocation: true
 ---
 
-# Ask Quirora
+# Ask qu1r0ra
 
 Recommend the local skill that matches the user's request:
 
