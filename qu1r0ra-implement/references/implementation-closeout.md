@@ -1,8 +1,8 @@
 # Implementation closeout
 
-This is the shared closeout procedure used by `qu1r0ra-implement` and the
-standalone `sync` skill. It is the source of truth for landing a completed
-implementation and retiring its temporary Git state.
+This is the closeout procedure used by `qu1r0ra-implement`. It is the source
+of truth for landing a completed implementation and retiring its temporary Git
+state.
 
 ## Entry conditions
 

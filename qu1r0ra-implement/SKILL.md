@@ -10,19 +10,21 @@ Use this personal wrapper when implementing a defined specification or ticket.
 It preserves the upstream implementation workflow while adding the user's
 stable review, harness, and delivery policy.
 
-## 1. Apply the upstream implementation workflow
+## 1. Apply the upstream implementation and review workflow
 
 Read and follow the current upstream skill at:
 
 `C:\Users\Quirora\Documents\qu1r0raOS\agent-skills\skills\implement\SKILL.md`
 
-Treat that file as upstream-owned. Do not edit or replace it. Complete its
-implementation, testing, review, and commit steps before proceeding.
+Treat that file as upstream-owned. Do not edit or replace it. Follow its
+implementation and testing steps. At its `/code-review` step, apply the
+personal review policy below; that call is the single initial Standards and
+Spec review. Complete the upstream commit step after that review.
 
 Completion: the scoped implementation is committed on its dedicated branch,
 and the verification evidence is available.
 
-## 2. Apply the personal review policy
+## 2. Review policy for the upstream `/code-review` step
 
 Use the harness's actual leaf-subagent primitive for code review. Reviewers are
 read-only leaf workers: they do not create tasks, chats, threads, forks,
