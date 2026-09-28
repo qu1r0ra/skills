@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # grill-qu1r0ra
 
-Use this personal wrapper for design conversations that deserve interrogation but not a glossary. It pairs the `grilling` interview with `domain-modeling`'s ADR-offer gate, nothing else.
+Use this personal wrapper for design conversations that deserve interrogation but not a glossary. It uses the `grilling` interview and reads the ADR offer criteria from `domain-modeling/ADR-FORMAT.md`.
 
 ## 1. Interview
 
@@ -16,7 +16,7 @@ Call the `grilling` skill on the topic. Work the frontier to an empty state, con
 
 Once the interview settles a decision, check it against the offer criteria and template at:
 
-`C:\Users\Quirora\Documents\qu1r0raOS\agent-skills\skills\domain-modeling\ADR-FORMAT.md`
+`../domain-modeling/ADR-FORMAT.md`
 
 Offer to write the ADR only when all three criteria hold. Otherwise, say nothing about it.
 
