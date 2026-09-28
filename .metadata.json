@@ -75,6 +75,18 @@
         },
         "approved_changes": []
       },
+      "find-docs": {
+        "source": "https://github.com/upstash/context7.git",
+        "branch": "master",
+        "source_path": "skills/find-docs",
+        "commit": "713b0a80be71a3e39d9c3628af2bca074a241b86",
+        "tree_hash": "sha1:b635cd66f1414befd36d18646561398de2ddab54",
+        "directory_hash": "sha256:e1bf323620fac157a2127e657d0eadb07c4bd4543cdde0cb3338699b3038c449",
+        "file_hashes": {
+          "SKILL.md": "sha256:5bf22997630fd5518112ab855c55ddba8653b7aefe16e5efad70e38966927fcf"
+        },
+        "approved_changes": []
+      },
       "grill-me": {
         "source": "https://github.com/mattpocock/skills.git",
         "branch": "main",
@@ -126,6 +138,32 @@
           "agents/openai.yaml": "sha256:5c479fd562c691851690e8b18c8501045bef0943c10743d636b2fae26add1d28"
         },
         "approved_changes": []
+      },
+      "humanizer": {
+        "source": "https://github.com/blader/humanizer.git",
+        "branch": "main",
+        "source_path": ".",
+        "commit": "225a6f39ac85f76ee48dbad772ea4abe4ed6c9d8",
+        "tree_hash": "sha1:8ed37b6d1d98a0bbdb599d0399a4a2185eb8fa03",
+        "directory_hash": "sha256:870170950efc0693c2c0d9ae71508c0f32ab594e92853a864acccdaed86386f9",
+        "file_hashes": {
+          ".claude-plugin/marketplace.json": "sha256:e539740285b660d2288a38b6d9b237396c6769828c671c46b9f91e760db6cc29",
+          ".claude-plugin/plugin.json": "sha256:054c0afeeb03c12f01a7f156da949edfdec3a2b756588f5ff4ee7357b0c07f6a",
+          ".cursor-plugin/plugin.json": "sha256:d1e0b50594cf4bbe57fd164b771b401713a91b76b5a213ebe8f4558bb2036546",
+          ".github/ISSUE_TEMPLATE/config.yml": "sha256:cb7e95de7606d07654024c8d47916796b307033e23ddb2b0a821a9bf89e999ef",
+          ".github/ISSUE_TEMPLATE/new-pattern.yml": "sha256:7436d578fa0056a09da5da6da950a03cb49f3ce27cf268ae295eb3d7ca19f604",
+          ".github/ISSUE_TEMPLATE/rewrite-problem.yml": "sha256:ecfe5e82c5b6d44683e0cb63cfad117dfdd16e30cc6f03510ef335414eea4947",
+          ".github/workflows/validate.yml": "sha256:f2d6a8780fb0b3cf6fa7d2ffccd72d0fc8bee29b4e63ea0fd65924712c9055fd",
+          "AGENTS.md": "sha256:de84a449da400454df1225ddb1ced728c35bf0be7811b239e3370c7dbe1f4e69",
+          "CHANGELOG.md": "sha256:b3591fe203429f1a6bd2f713c79272e9a8e58a487843d0908d2bbe0700722afa",
+          "LICENSE": "sha256:4ac4810254ab36d45419141aeb8e69bf50652cfafe5b2dab947d06d44e5cbf96",
+          "README.md": "sha256:a07a054f230dca1e3d25e32ba6c808905b743cc6fa56bf8b6868cee0b12a0432",
+          "SKILL.md": "sha256:0612f1dfb1672b0ea9b97e139bf1f06cabe98d8b27424fe8ff01e1fb4cc99cad",
+          "agents/openai.yaml": "sha256:9d87ff83149a04f86a372948b8ee35fa249de20923867bbc2a49304290aad736",
+          "scripts/validate-package.py": "sha256:941bd99e52b2ba21449719bb7969607ac8117e3dc173d0c9dfe64fd274c65938"
+        },
+        "approved_changes": [],
+        "source_root": "."
       },
       "implement": {
         "source": "https://github.com/mattpocock/skills.git",

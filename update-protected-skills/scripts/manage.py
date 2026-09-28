@@ -100,12 +100,12 @@ def protected(metadata: dict[str, Any], *, required: bool = True) -> dict[str, A
             raise Blocked(f"Protected skill {name} has an invalid source path")
         if not isinstance(entry["commit"], str) or not re.fullmatch(r"[0-9a-f]{40}", entry["commit"]):
             raise Blocked(f"Protected skill {name} has an invalid adopted commit")
-        source_path = safe_rel(entry["source_path"])
+        source_path = entry["source_path"] if entry["source_path"] == "." else safe_rel(entry["source_path"])
         source_root = entry.get("source_root", "skills")
         if not isinstance(source_root, str):
             raise Blocked(f"Protected skill {name} has an invalid source root")
-        source_root = safe_rel(source_root)
-        if not source_path.startswith(source_root + "/"):
+        source_root = source_root if source_root == "." else safe_rel(source_root)
+        if (source_root == "." and source_path != ".") or (source_root != "." and not source_path.startswith(source_root + "/")):
             raise Blocked(f"Protected skill {name} source path is outside its source root")
         if not isinstance(entry["tree_hash"], str) or not re.fullmatch(r"sha1:[0-9a-f]{40}", entry["tree_hash"]):
             raise Blocked(f"Protected skill {name} has an invalid source tree hash")
@@ -195,12 +195,15 @@ def local_snapshot(path: Path) -> dict[str, str]:
 
 
 def source_files(root: Path, commit: str, source_path: str) -> tuple[dict[str, bytes], str]:
-    source_path = safe_rel(source_path)
-    result = subprocess.run(["git", "ls-tree", "-r", "-z", commit, "--", source_path], cwd=root, capture_output=True, check=False)
+    source_path = source_path if source_path == "." else safe_rel(source_path)
+    tree_args = ["git", "ls-tree", "-r", "-z", commit, "--"]
+    if source_path != ".":
+        tree_args.append(source_path)
+    result = subprocess.run(tree_args, cwd=root, capture_output=True, check=False)
     if result.returncode:
         raise Blocked(f"Could not read upstream tree {commit}:{source_path}")
     files: dict[str, bytes] = {}
-    prefix = source_path.rstrip("/") + "/"
+    prefix = "" if source_path == "." else source_path.rstrip("/") + "/"
     for record in result.stdout.split(b"\0"):
         if not record:
             continue
@@ -222,13 +225,25 @@ def source_files(root: Path, commit: str, source_path: str) -> tuple[dict[str, b
             raise Blocked(f"Could not read upstream blob {oid}")
         files[relative] = raw.stdout
     validate_windows_paths(set(files))
-    tree_result = git(root, "rev-parse", "--verify", f"{commit}:{source_path}", check=False)
+    tree_ref = f"{commit}^{{tree}}" if source_path == "." else f"{commit}:{source_path}"
+    tree_result = git(root, "rev-parse", "--verify", tree_ref, check=False)
     if tree_result.returncode:
         raise Blocked(f"Upstream skill directory is missing at {commit}: {source_path}")
     return files, "sha1:" + tree_result.stdout.strip()
 
 
 def source_skill_paths(root: Path, commit: str, source_root: str = "skills") -> dict[str, str]:
+    if source_root == ".":
+        skill = git(root, "show", f"{commit}:SKILL.md", check=False)
+        if skill.returncode:
+            return {}
+        if not skill.stdout.startswith("---\n"):
+            raise Blocked("Upstream root SKILL.md has no YAML frontmatter")
+        frontmatter = skill.stdout.split("\n---", 1)[0]
+        match = re.search(r"(?m)^name:\s*([A-Za-z0-9._-]+)\s*$", frontmatter)
+        if not match:
+            raise Blocked("Upstream root SKILL.md has no plain skill name")
+        return {match.group(1): "."}
     source_root = safe_rel(source_root)
     raw = subprocess.run(["git", "ls-tree", "-r", "-z", "--name-only", commit, "--", source_root], cwd=root, capture_output=True, check=False)
     if raw.returncode:
@@ -315,7 +330,7 @@ def skill_entry(url: str, branch: str, source_path: str, commit: str, tree_hash:
         "approved_changes": [],
     }
     if source_root != "skills":
-        entry["source_root"] = safe_rel(source_root)
+        entry["source_root"] = source_root if source_root == "." else safe_rel(source_root)
     return entry
 
 
@@ -485,7 +500,7 @@ def cmd_adopt(root: Path, args: argparse.Namespace) -> None:
         if not upstream_is_ancestor(root, args.commit, tip):
             raise Blocked(f"Adopted commit {args.commit} is not an ancestor of fetched {branch} tip {tip}")
         commit = args.commit
-    source_root = safe_rel(args.source_root)
+    source_root = args.source_root if args.source_root == "." else safe_rel(args.source_root)
     paths = source_skill_paths(root, commit, source_root)
     new_entries = dict(manifest["skills"])
     with tempfile.TemporaryDirectory(prefix="protected-skill-audit-") as temporary:
@@ -813,7 +828,7 @@ def parser() -> argparse.ArgumentParser:
     adopt = sub.add_parser("adopt", help="record source identity and hashes for explicitly selected skills")
     adopt.add_argument("--source-url", required=True)
     adopt.add_argument("--branch", default="main")
-    adopt.add_argument("--source-root", default="skills", help="directory containing skill directories in the upstream repository")
+    adopt.add_argument("--source-root", default="skills", help="directory containing skill directories, or . for a repository-root skill")
     adopt.add_argument("--commit", help="full source commit to adopt; must be an ancestor of the fetched branch tip")
     adopt.add_argument("--skills", nargs="+", required=True)
     sub.add_parser("check", help="check canonical and configured projection hashes")

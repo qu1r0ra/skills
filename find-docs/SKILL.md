@@ -19,16 +19,8 @@ description: >-
 
 # Documentation Lookup
 
-Retrieve current documentation and code examples for any library using Context7.
+Retrieve current documentation and code examples for any library using the Context7 CLI.
 
-### Antigravity & MCP-Enabled Environments (Preferred)
-When running in Antigravity or environments with the Context7 MCP server configured, dispatch calls directly without terminal process execution:
-- **Step 1 (Resolve Library)**:
-  `call_mcp_tool(ServerName="context7", ToolName="resolve-library-id", Arguments={"libraryName": "<name>", "query": "<query>"})`
-- **Step 2 (Query Docs)**:
-  `call_mcp_tool(ServerName="context7", ToolName="query-docs", Arguments={"libraryId": "<id>", "query": "<query>"})`
-
-### CLI Environments (Fallback)
 Run commands with `npx ctx7@latest` so setup always uses the latest CLI without a global install:
 
 ```bash
@@ -133,7 +125,7 @@ The query directly affects the quality of results. Be specific and include relev
 | Bad (too vague) | `"hooks"` |
 | Bad (too broad) | `"routing and auth and caching in Next.js"` |
 
-Use the user's full question as the query when possible — vague one-word queries return generic results, and multi-topic queries dilute ranking and return shallow results for each topic.
+Describe what to look up in the library's documentation, rather than the task to complete — vague one-word queries return generic results, and multi-topic queries dilute ranking and return shallow results for each topic.
 
 The output contains two types of content: **code snippets** (titled, with language-tagged blocks) and **info snippets** (prose explanations with breadcrumb context).
 

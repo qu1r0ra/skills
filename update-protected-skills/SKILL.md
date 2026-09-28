@@ -24,4 +24,8 @@ copy at a known historical revision; the full commit must exist and be an
 ancestor of the fetched branch tip. Subsequent previews and updates follow the
 recorded source root and branch.
 
+For a skill whose `SKILL.md` is at the upstream repository root, use
+`--source-root .`. The protected snapshot then covers the complete repository
+tree, so the canonical skill directory must contain every upstream file.
+
 The updater runs fixed Git and SkillShare commands with argument arrays and no shell. It treats fetched files as data, accepts only regular files, rejects paths that collide or cannot be represented distinctly on Windows, and audits each changed directory before replacing its canonical copy.
