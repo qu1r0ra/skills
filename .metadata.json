@@ -1,19 +1,6 @@
 {
   "version": 1,
-  "entries": {
-    "unslop": {
-      "source": "github.com/cursor/plugins/pstack/skills/unslop",
-      "type": "github-subdir",
-      "installed_at": "2026-09-15T23:57:30.9795256+08:00",
-      "repo_url": "https://github.com/cursor/plugins.git",
-      "subdir": "pstack/skills/unslop",
-      "version": "b42effe",
-      "tree_hash": "d5baa969e71c4ddb563412b0ec170fa3b05b6d6e",
-      "file_hashes": {
-        "SKILL.md": "sha256:195411d320b5b328f9f642baf59757ed19aaf0931c0838740e0aca273d538dc1"
-      }
-    }
-  },
+  "entries": {},
   "protected_upstream": {
     "version": 1,
     "skills": {
@@ -311,19 +298,6 @@
           "agents/openai.yaml": "sha256:2e683717720cf456d165d0bb1a68bb600d0b6a8ccb61841c172e50d26f95351c"
         },
         "approved_changes": []
-      },
-      "unslop": {
-        "source": "https://github.com/cursor/plugins.git",
-        "branch": "main",
-        "source_path": "pstack/skills/unslop",
-        "commit": "b42effe0aa50f59c693d7e2924714e015e00bf7c",
-        "tree_hash": "sha1:d5baa969e71c4ddb563412b0ec170fa3b05b6d6e",
-        "directory_hash": "sha256:de0e637c582f487db087b0248dcce01870eb3d28567b5d96c36842f057bbb680",
-        "file_hashes": {
-          "SKILL.md": "sha256:195411d320b5b328f9f642baf59757ed19aaf0931c0838740e0aca273d538dc1"
-        },
-        "approved_changes": [],
-        "source_root": "pstack/skills"
       },
       "wait-what": {
         "source": "https://github.com/mattpocock/skills.git",

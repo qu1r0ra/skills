@@ -12,5 +12,7 @@ Recommend the local skill that matches the user's request:
 - An existing idea portfolio to review or triage: use `/review-ideas`.
 - Improvement candidates from recent local work across harnesses: use `/brainstorm-ideas`.
 - Engineering work that needs a Matt Pocock skill or flow: use `/ask-matt`.
+- An AIOS effort routed by Ask Matt to `/wayfinder`: use
+  `/wayfinder-qu1r0ra` so the map follows the central issue contract.
 
 Keep idea capture, review, and brainstorming separate from engineering workflow selection. This router names the user's next skill; let the user invoke it. Do not promote ideas into another workflow automatically.
