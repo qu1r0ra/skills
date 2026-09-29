@@ -10,7 +10,7 @@ Use this personal wrapper for design conversations that deserve interrogation bu
 
 ## 1. Interview
 
-Call the `grilling` skill on the topic. Work the frontier to an empty state, confirmed by the user, exactly as that skill defines.
+Call the `grilling` skill on the topic. Work the frontier to an empty state, confirmed by the user, exactly as that skill defines. Ask in plain prose, never with `AskUserQuestion` cards, and state a recommendation with every question.
 
 ## 2. Offer an ADR
 
