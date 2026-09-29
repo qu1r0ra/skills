@@ -15,6 +15,9 @@ Dispatch separate Standards and Spec reviews with the built-in read-only
 `Explore` subagent when it is available. Give each worker a bounded scope, the
 fixed diff, the applicable standards or specification sources, and an explicit
 request for one evidence-based report with no edits or further delegation.
+The parent owns every build, test, and lint run: pass its command results in
+the dispatch, and reviewers judge the code against that evidence and run
+nothing.
 `Explore` does not inherit `CLAUDE.md` or a Git status snapshot, so include the
 needed agent rules and Git scope in the dispatch. If no suitable read-only
 worker is available, mark the lane unavailable; deterministic parent

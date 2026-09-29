@@ -8,7 +8,10 @@ disable-model-invocation: true
 
 Use this personal wrapper for a whole-codebase audit. It keeps the upstream deepening method and replaces its scope, report, and grilling steps.
 
-Read and follow the upstream skill at `../improve-codebase-architecture/SKILL.md`. Treat it as upstream-owned. Use its step 1 method inside the Deepening dimension below; this wrapper replaces its steps 2 and 3.
+This wrapper owns the invocation. Read the protected
+[`improve-codebase-architecture`](../improve-codebase-architecture/SKILL.md) as
+the Deepening method reference. Use its step 1 method inside the Deepening
+dimension below; this wrapper replaces its steps 2 and 3.
 
 ## 1. Explore by dimension
 
@@ -55,8 +58,14 @@ Save the full report, `Low` entries included, as `architecture-audit-<date>.md` 
 
 Ask: "Which of these would you like to address?"
 
+Completion: the ranked report and full saved copy agree, the user has its path
+and tracker offer, and the selected findings are identified or await a reply.
+
 ## 4. Grill
 
 Call `grill-qu1r0ra` on the chosen findings. Open with which findings and in what batches, ordered by the Sequencing lines. Decide technical calls yourself and put scope, claims a fix could change, and irreversible steps to the user. Interface design for AIOS belongs to `to-spec-qu1r0ra`. When the user chooses one finding, grill its design directly.
 
 When the grill finishes, offer `to-spec-qu1r0ra` for an AIOS spec and `/to-tickets` for an approved breakdown. Run neither without the user's request.
+
+Completion: the chosen findings and batch order are settled, and the user has
+the applicable next-step offer.

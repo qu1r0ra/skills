@@ -5,10 +5,10 @@ description: Turn an AIOS design conversation into a spec and a validated centra
 
 # To Spec qu1r0ra
 
-Use this wrapper for an AIOS-owned specification. Read and follow the protected
-[`to-spec`](../to-spec/SKILL.md) for synthesis, repository exploration, test
-seams, and spec content. For AIOS, complete its publication step through the
-draft and approval sequence below.
+Use this wrapper for an AIOS-owned specification. This wrapper owns the AIOS
+workflow. Read the protected [`to-spec`](../to-spec/SKILL.md) as a reference for
+repository exploration, test seams, synthesis, and the spec template. Follow
+the central issue contract for publication.
 
 Before creating a central issue, read
 [`docs/agents/issue-tracker.md`](../../../docs/agents/issue-tracker.md) and the
@@ -17,19 +17,16 @@ skill. Route an implementation issue to its repository-owned tracker when that
 repository has one; use the central tracker for AIOS-owned or coordinating work.
 
 1. Draft the spec from the conversation and relevant domain material. Confirm
-   the test seams as upstream requires. Add the central issue contract's
-   routing labels, target, scope, blockers, and verification expectations to
-   the draft. A publishable shaped spec uses `ready-for-agent`.
-2. Validate the complete issue draft with
-   `just tickets --validate-draft <path>`. Resolve reported shape or routing
-   errors before presenting it. Show the user the issue title, body, labels,
-   blocker relationships, and destination for review.
-3. Obtain explicit approval for that publication packet. Then use the central
-   issue contract's `just tickets --publish-draft <path> --confirm` route.
-   Verify the live issue and its labels, body, blockers, and target with `gh`, and run
-   `just tickets --validate`. If approval is withheld, leave the validated
-   draft unpublished and report its path.
+   the test seams as the upstream reference requires. Add the central issue
+   contract's routing labels, target, scope, blockers, and verification
+   expectations. A publishable shaped spec uses `ready-for-agent`. Completion:
+   the draft covers every upstream spec section and AIOS issue requirement.
+2. Follow the draft validation and packet review steps in **Shaped issue
+   publication** in the central issue tracker contract. Completion: the exact
+   publication packet passes validation and has been shown to the user.
+3. Follow that contract's approval and publication branch. Completion: the user
+   has the identified unpublished draft or the verified live issue, with its
+   identity and any remaining gate stated.
 
-Completion: the user has a validated draft or a verified live issue, with any
-publication gate and issue identity stated. Spec approval does not authorize
-implementation or a later ticket breakdown.
+Spec approval covers this publication packet. Implementation and a later ticket
+breakdown require their own instructions.

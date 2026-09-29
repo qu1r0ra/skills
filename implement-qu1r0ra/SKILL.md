@@ -18,11 +18,9 @@ the repository and delivery mode.
 
 ## 1. Apply the upstream implementation and review workflow
 
-Read and follow the current upstream skill at:
-
-`C:\Users\Quirora\Documents\qu1r0raOS\agent-skills\skills\implement\SKILL.md`
-
-Treat that file as upstream-owned. Follow its implementation and testing steps.
+Read the protected [`implement`](../implement/SKILL.md) as the implementation
+and review reference. This wrapper owns the invocation and uses its
+implementation and testing steps.
 For this wrapper, commit the complete scoped change before its `/code-review`
 step so the protected review skill's `<fixed-point>...HEAD` diff includes the
 implementation. Use the recorded branch base as the fixed point. Commit any
@@ -75,31 +73,12 @@ re-review trigger, final P1 disposition, and any Round 4 trigger.
 
 ## 2. Complete the implementation closeout
 
-After the implementation commit and review, apply the shared closeout procedure
-at:
-
-`C:\Users\Quirora\Documents\qu1r0raOS\agent-skills\skills\implement-qu1r0ra\references\implementation-closeout.md`
+After the implementation commit and review, apply the shared
+[implementation closeout procedure](references/implementation-closeout.md).
 
 Do not stop at “committed and reviewed” and ask the user to repeat the landing
 request. Unless the user explicitly requested handoff-only retention, continue
-through the delivery-mode branch:
-
-- local-only: merge into the supervising branch, publish when possible, remove
-  the exact clean implementation worktree, delete its merged local branch, and
-  update or close the ticket according to acceptance state;
-- remote-backed AIOS control-plane work: follow the direct-to-`main` landing
-  path in the shared closeout procedure, verify the pushed commit, retire the
-  local feature branch, and update or close the ticket;
-- other remote-backed work: publish the feature branch, merge its pull request
-  when all required automated gates pass and no human gate remains, verify the
-  merge, retire local and permitted remote feature branches, and update or
-  close the ticket;
-- issue-only: update the coordinating ticket without inventing an
-  implementation merge.
-
-Use one retry for a failed Git publication. If publication remains unavailable,
-preserve the verified local result, leave the ticket open or in its
-publication-follow-up state, and report the exact failure.
+through the closeout procedure's selected delivery mode and failure branches.
 
 Completion: the implementation is landed or has a named unresolved gate, the
 secondary worktree/branch state is verified, and the affected ticket receipt
@@ -110,4 +89,4 @@ is live and accurate.
 Report implementation commits, review-pair count, tests, landing commit,
 publication result, retired worktrees and branches, ticket state, and any
 remaining human or technical gate. Do not claim ticket closure from landing
-alone.
+alone. Completion: the receipt names every verified result and unresolved gate.

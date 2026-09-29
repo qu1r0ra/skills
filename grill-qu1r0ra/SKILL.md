@@ -14,6 +14,8 @@ ADR offer criteria from `domain-modeling/ADR-FORMAT.md`.
 
 Call the `grilling` skill on the topic. Work the frontier to an empty state and get the user's confirmation, exactly as that skill defines. Send each interview question in ordinary chat prose with your recommendation. Do not use `AskUserQuestion` or other question cards.
 
+Completion: the frontier is empty and the user has confirmed the decision.
+
 ## 2. Offer an ADR
 
 Once the interview settles a decision, check it against the offer criteria and template at:
@@ -21,6 +23,9 @@ Once the interview settles a decision, check it against the offer criteria and t
 `../domain-modeling/ADR-FORMAT.md`
 
 Offer to write the ADR only when all three criteria hold. Otherwise, say nothing about it.
+
+Completion: the criteria have been checked and any warranted ADR offer has
+been made.
 
 ## Out of scope
 
