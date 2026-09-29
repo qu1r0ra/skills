@@ -1,0 +1,5 @@
+interface:
+  display_name: "SkillShare"
+  short_description: "Configure, sync, and audit skills and MCP settings with the SkillShare CLI"
+policy:
+  allow_implicit_invocation: false

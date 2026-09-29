@@ -1,6 +1,35 @@
 {
   "version": 1,
-  "entries": {},
+  "entries": {
+    "skillshare": {
+      "source": "github.com/runkids/skillshare/skills/skillshare",
+      "type": "github-subdir",
+      "installed_at": "2026-09-29T14:56:50.043536+08:00",
+      "repo_url": "https://github.com/runkids/skillshare.git",
+      "subdir": "skills/skillshare",
+      "version": "b99c715",
+      "tree_hash": "8e9599f2eb09d9eea189af5b7f7a45430d6fd05f",
+      "commit": "b99c7153c15b28774f7bf135d552ed386ab1e02a",
+      "file_hashes": {
+        "SKILL.md": "sha256:98783f3b3bcee727eba1ce09758e6b29bfa91088c507b5eb240e9f01dd5b22e0",
+        "references/TROUBLESHOOTING.md": "sha256:c3d48e413aaf043fa5e255ffe166a0fd98995216812f352cfc6f332633be2d30",
+        "references/audit.md": "sha256:2fcf2573564d8d41a3883c4830a198c79d642ed6b30fa86237f358766f9bf254",
+        "references/backup.md": "sha256:31258dbf07222d5cf4a7ff2ec39fc3626a03313c5271809e2d5e2bb229c54345",
+        "references/extras.md": "sha256:6a108476a687ed2ea70899e1e56f7e72b6ac37d23e410b2f402650f140b9c164",
+        "references/init.md": "sha256:8364ff36da674d772ee25431eb906d90f96243cd8b1142e16a14634b60b0b343",
+        "references/install.md": "sha256:3945895530c2e91040f587ca412178b7d7246159c1b02080326fd86d4c375b09",
+        "references/log.md": "sha256:00b27400550c1e3d905044ff3078cb6159897a87839a94875b361e1ae7820f56",
+        "references/mcp.md": "sha256:1279916cc9c31bbfbb0add6257734bf0a14f1e66d1c5784ef5e9e36b8d7e8e83",
+        "references/native-agents.md": "sha256:0c835a9400b2731c903a2cb8c70e4ba18a32f02bcd254f5f7079ec732483e73f",
+        "references/plugins.md": "sha256:3ede367457c7d534ebad259f8a3ebd6355e6cc57f23738c266ef9b9c80b0871b",
+        "references/status.md": "sha256:7a8502290e7d3cf33dfdeba49355f4a9b57ab9f50f9d6357268c0c7cd37e154c",
+        "references/sync.md": "sha256:3c36550c7a33f0f3e02a9e3f86ba2447d40481d965e2d76e39c212a062e1a920",
+        "references/targets.md": "sha256:62640d695bba315c8905f14fba602d9542f179ace981af2a54c66c9df8f74fed",
+        "references/trash.md": "sha256:6dc039ace9ff1f62e0c9a61a0bf89f96181b8493528e516b8e5f37233c6a2817",
+        "scripts/run.sh": "sha256:ce5532a4ab4fc64f3fcc24a6af1775508020bcd0c5c1c3c20e023b65f5ce3131"
+      }
+    }
+  },
   "protected_upstream": {
     "version": 1,
     "skills": {
