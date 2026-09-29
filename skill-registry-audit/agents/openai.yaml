@@ -1,2 +1,5 @@
+interface:
+  display_name: "Skill Registry Audit"
+  short_description: "Audit skill catalog drift, provenance, and quality"
 policy:
   allow_implicit_invocation: false

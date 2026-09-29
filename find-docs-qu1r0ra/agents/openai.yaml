@@ -1,0 +1,5 @@
+interface:
+  display_name: "Find Docs qu1r0ra"
+  short_description: "Find current docs for AIOS and third-party library changes"
+policy:
+  allow_implicit_invocation: false

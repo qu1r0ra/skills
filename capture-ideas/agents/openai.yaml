@@ -1,0 +1,5 @@
+interface:
+  display_name: "Capture Ideas"
+  short_description: "Save one or more vague ideas for later"
+policy:
+  allow_implicit_invocation: false

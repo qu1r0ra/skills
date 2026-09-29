@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ask qu1r0ra"
+  short_description: "Choose a local idea flow or route engineering work to Ask Matt"
+policy:
+  allow_implicit_invocation: false

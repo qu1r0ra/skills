@@ -19,7 +19,12 @@ If the requested depth is unclear, use quick and state the scope.
    managed targets from live SkillShare configuration. Include other host-level
    roots only when the user requests them. Complete when each inspected root,
    target, and authority is named.
-2. Run `skillshare doctor`, `skillshare status`, and `skillshare diff --stat`.
+2. From the AIOS root, run
+   `uv run python scripts/validate_skill_openai_yaml.py`. Report validation
+   findings and the protected upstream skills the checker intentionally skips.
+   Complete when every non-protected canonical skill passes the catalog
+   metadata check.
+3. Run `skillshare doctor`, `skillshare status`, and `skillshare diff --stat`.
    Run the protected updater's read-only `check`. Compare actual paths before
    calling same-named entries duplicates; distinguish managed drift from
    target-local content. Complete when every configured target has a status and
@@ -30,23 +35,23 @@ attention. Stop when the user can distinguish clean projections from drift.
 
 ## Full audit
 
-3. Inventory every canonical `SKILL.md`, configured projection, and local-only
+4. Inventory every canonical `SKILL.md`, configured projection, and local-only
    skill in scope. Record name, path, invocation policy, provenance, Git state,
    and authority. Preserve unrelated uncommitted work. Complete when every
    entry is classified and unexplained entries are listed.
-4. For protected skills, compare the manifest's recorded hashes and revisions
+5. For protected skills, compare the manifest's recorded hashes and revisions
    with the canonical files and fetched upstream tips. Use the updater's
    `preview --skill NAME` where an upstream change needs inspection. For other
    imported skills, trace provenance through repository history and the
    publisher's primary source where available. Mark unverified origins as
    unknown. Complete when each provenance and freshness claim has evidence.
-5. Read the canonical skills and reachable references using
+6. Read the canonical skills and reachable references using
    `writing-for-agents` as the quality rubric. Check triggers, invocation mode,
    completion bounds, live pointers, stale commands, authority conflicts,
    unsafe effects, and purpose-level overlap. Distinguish complementary skills
    and intentional projections from duplicate behavior. Complete when every
    canonical skill is marked keep, revise, retire, or unresolved with a reason.
-6. Report exact paths and evidence for actionable findings, including what is
+7. Report exact paths and evidence for actionable findings, including what is
    sound. Prioritize broken registration or authority before wording polish.
    Check callers before recommending removal. Separate tool findings from
    judgment and state any uninspected scope. Complete when each finding is

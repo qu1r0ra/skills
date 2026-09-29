@@ -1,0 +1,5 @@
+interface:
+  display_name: "Review Ideas"
+  short_description: "Review and triage the shared idea inbox"
+policy:
+  allow_implicit_invocation: false

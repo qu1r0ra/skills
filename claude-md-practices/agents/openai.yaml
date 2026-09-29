@@ -1,0 +1,3 @@
+interface:
+  display_name: "Claude MD Practices"
+  short_description: "Write lean agent instructions for Claude and Codex"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "CSC612M Assembly Review"
+  short_description: "Check CSC612M x86-64 assembly against course guidelines"

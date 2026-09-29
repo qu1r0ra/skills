@@ -1,0 +1,5 @@
+interface:
+  display_name: "Brainstorm Ideas"
+  short_description: "Find improvement candidates from local sessions"
+policy:
+  allow_implicit_invocation: false

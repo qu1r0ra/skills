@@ -4,7 +4,7 @@ description: "Personal wrapper: grill the user through a design decision, then o
 disable-model-invocation: true
 ---
 
-# grill-qu1r0ra
+# Grill qu1r0ra
 
 Use this personal wrapper for design conversations that deserve interrogation but not a glossary. It uses the `grilling` interview and reads the ADR offer criteria from `domain-modeling/ADR-FORMAT.md`.
 

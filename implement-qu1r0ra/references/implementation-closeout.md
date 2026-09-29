@@ -1,6 +1,6 @@
 # Implementation closeout
 
-This is the closeout procedure used by `qu1r0ra-implement`. It is the source
+This is the closeout procedure used by `implement-qu1r0ra`. It is the source
 of truth for landing a completed implementation and retiring its temporary Git
 state.
 
@@ -34,7 +34,7 @@ worktree, and delivery mode.
    still uses a no-fast-forward merge for local-only implementations so the
    ticket receives a durable merge boundary.
 
-Completion: the merge or pull-request operation is safe to attempt without
+Completion: the selected landing operation is safe to attempt without
 overwriting unrelated work.
 
 ## Local-only landing
@@ -54,7 +54,24 @@ Completion: the supervising branch contains the implementation through a
 verified merge commit, and publication is either verified or explicitly
 recorded as unavailable.
 
-## Remote-backed landing
+## AIOS direct-to-main landing
+
+For AIOS control-plane implementation, follow the repository's
+`docs/agents/implementation-contract.md` and use its direct-to-`main` path.
+
+1. Verify the exact implementation commit and current `origin/main` ancestry.
+   Confirm the active rules for `main` permit a fast-forward direct push and
+   that no required check or human gate remains.
+2. Push the verified commit to `origin/main`. If `main` advanced, reconcile
+   the branch and rerun affected checks before pushing. Preserve the branch if
+   publication fails. Never force-push or bypass a repository rule.
+3. Verify the exact commit is reachable from `origin/main` and record its
+   commit SHA as the landing receipt.
+
+Completion: the pushed commit is verified on `origin/main`, or a named
+publication or human gate remains and the feature state is preserved.
+
+## Other remote-backed landing
 
 1. Identify the implementation pull request and publish its feature branch,
    retrying one failed push from the same verified state.
@@ -72,10 +89,10 @@ technical gate remains and the feature state is preserved.
 ## Retire temporary Git state
 
 1. Remove only the exact clean registered implementation worktree after the
-   merge or verified pull-request merge.
+   implementation is verified on the supervising branch or `origin/main`.
 2. Delete the corresponding local feature branch only after verifying its tip
-   is merged. Delete the remote feature branch after a verified remote merge
-   when the platform permits it.
+   is landed. Delete the remote feature branch after a verified pull-request
+   merge when the platform permits it.
 3. Preserve the merge SHA and implementation receipt even after branch removal.
 4. Use no force removal. If cleanup fails, preserve the state and report the
    exact path or branch that remains.
@@ -86,7 +103,7 @@ deleted branch is identified in the receipt.
 ## Update and close tickets
 
 Update the primary implementation ticket with the implementation commits,
-merge or pull-request SHA, verification evidence, review-round/pair count,
+landing or pull-request SHA, verification evidence, review-round/pair count,
 repair/re-review history, publication result, cleanup result, and remaining
 gates. Update directly
 affected blockers or dependents only when their state changed.
@@ -102,14 +119,14 @@ accepted, and remaining-gate status.
 
 ## Failure states
 
-- Unrelated dirty-path overlap: stop before merge and preserve the supervising
-  checkout.
+- Unrelated dirty-path overlap: stop before landing and preserve the
+  supervising checkout.
 - Unclean or mismatched implementation worktree: stop before cleanup.
 - Merge conflict requiring user intent: preserve the conflict and report it.
 - Failed publication: retry once, then preserve the local result and leave the
   ticket open or in publication follow-up.
-- Required human approval or live authorization: leave the pull request or
-  issue open and record the gate.
+- Required human approval or live authorization: preserve the delivery state
+  and record the gate in the issue.
 
 The closeout is complete only when every requested mutation has a verified
 result or a named failure state.

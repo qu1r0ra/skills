@@ -1,0 +1,6 @@
+interface:
+  display_name: "Todo"
+  short_description: "Capture durable AIOS tasks as lightweight GitHub issues"
+  default_prompt: "Use $todo to capture one or more durable AIOS tasks as lightweight GitHub Issues."
+policy:
+  allow_implicit_invocation: false
