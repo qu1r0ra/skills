@@ -64,6 +64,5 @@ ticket, schedule work, or mutate Reflection storage.
    while leaving the original content unchanged.
 
 5. Report the updated lifecycle status, event, and any named next flow. Stop
-   at that boundary; the named next flow remains a user-selected follow-up and
-   is not invoked by this skill. Completion means the user has a durable local
-   receipt of the decision and no unrequested downstream artifact exists.
+   at that boundary. Completion means the updated lifecycle status, recorded
+   event, and selected follow-up route are clear from the bundle.
