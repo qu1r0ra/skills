@@ -4,15 +4,24 @@ Operational rules when running under Claude Code.
 
 ## Independent review
 
-Dispatch each Standards and Spec reviewer through the Agent tool with
-`subagent_type: "leaf-reviewer"`. That definition
-(`~/.claude/agents/leaf-reviewer.md`) pins the Claude Code pair from
-`docs/agents/model-routing.md` in its `model` and `effort` frontmatter; the
-Agent tool's own `model` parameter carries no effort, so leave it unset. Before
-the first dispatch, read the definition and confirm its frontmatter matches the
-Claude Code row. If the definition is missing or differs, record the review
-lane as unavailable; deterministic parent verification may continue, but the
-receipt cannot claim the missing review.
+Read `docs/agents/model-routing.md` before dispatch. Confirm that the active
+Claude Code settings pin the listed worker model through
+`CLAUDE_CODE_SUBAGENT_MODEL` and `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1`, and that
+the session effort matches the listed effort. Pass no model in the Agent tool
+call. If the pair cannot be confirmed or the harness cannot expose it, mark
+the review lane unavailable.
 
-Completion: every review and re-review worker ran as `leaf-reviewer`, and the
-receipt records the pair it resolved to.
+Dispatch separate Standards and Spec reviews with the built-in read-only
+`Explore` subagent when it is available. Give each worker a bounded scope, the
+fixed diff, the applicable standards or specification sources, and an explicit
+request for one evidence-based report with no edits or further delegation.
+`Explore` does not inherit `CLAUDE.md` or a Git status snapshot, so include the
+needed agent rules and Git scope in the dispatch. If no suitable read-only
+worker is available, mark the lane unavailable; deterministic parent
+verification may continue, but the receipt cannot claim the missing review.
+
+Check the resolved worker model in Claude Code's task view while the worker
+runs, and record the model, session effort, reviewer type, and any unavailable
+lane in the receipt. Completion means each required review and re-review used
+the routed pair and returned one bounded, read-only report, or its absence is
+explicit in the receipt.

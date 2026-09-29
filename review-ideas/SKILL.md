@@ -65,4 +65,5 @@ ticket, schedule work, or mutate Reflection storage.
 
 5. Report the updated lifecycle status, event, and any named next flow. Stop
    at that boundary. Completion means the updated lifecycle status, recorded
-   event, and selected follow-up route are clear from the bundle.
+   event, and selected follow-up route are clear from the durable local
+   receipt, and no unrequested downstream artifact was created.
