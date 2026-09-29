@@ -24,7 +24,7 @@ Grill only `new` and `conflicts` entries. Open the grill by listing the covered 
 
 ## Step 5: update the plan
 
-1. **Choose patch or rebuild.** Count the open tickets that the grill's decisions supersede or restructure. At about a third of the open tickets or more, rebuild through `/to-spec` and `/to-tickets`. Below that, patch.
+1. **Choose patch or rebuild.** Count the open tickets that the grill's decisions supersede or restructure. At about a third of the open tickets or more, rebuild through `/to-spec-qu1r0ra` and `/to-tickets`. Below that, patch.
 2. **Draft the patch** as local files, one per issue body:
    - Edit the spec in place. Add a pointer to the audit issue, and add the new stories and decisions.
    - Write each new ticket with its blocked-by links.

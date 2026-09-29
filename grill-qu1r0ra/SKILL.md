@@ -1,12 +1,14 @@
 ---
 name: grill-qu1r0ra
-description: "Personal wrapper: grill the user through a design decision, then offer an ADR when it clears the bar. No CONTEXT.md, no terminology work — use grill-with-docs for that."
-disable-model-invocation: true
+description: Grill the user through a material, user-owned design decision when asked or when an unresolved choice blocks a reliable outcome; offer an ADR when warranted.
 ---
 
 # Grill qu1r0ra
 
-Use this personal wrapper for design conversations that deserve interrogation but not a glossary. It uses the `grilling` interview and reads the ADR offer criteria from `domain-modeling/ADR-FORMAT.md`.
+Use this personal wrapper when the user asks to be grilled or a material,
+user-owned design choice needs an interview. Make routine technical choices
+without starting this workflow. It uses the `grilling` interview and reads the
+ADR offer criteria from `domain-modeling/ADR-FORMAT.md`.
 
 ## 1. Interview
 

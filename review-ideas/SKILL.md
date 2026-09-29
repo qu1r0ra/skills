@@ -51,6 +51,8 @@ ticket, schedule work, or mutate Reflection storage.
    A refinement carries a bounded note (up to 2000 characters); a merge names
    a different existing idea (`--target-id`); a promotion names exactly one of
    `grill-qu1r0ra`, `to-spec`, `to-tickets`, or `wayfinder` (`--next-flow`).
+   For an AIOS `to-spec` promotion, name `to-spec-qu1r0ra` as the follow-up
+   skill while keeping `to-spec` as the stored `--next-flow` value.
    Terminal states (`retired`, `promoted`, `merged`) reject further transitions.
 
    ```powershell

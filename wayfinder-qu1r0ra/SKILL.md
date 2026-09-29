@@ -31,3 +31,5 @@ frontier, ticket types, and chart/work sequence. Read it before proceeding.
 
 Use the upstream `wayfinder` skill directly when the work belongs to another
 repository's own tracker.
+When an AIOS map clears and the user asks for the buildable spec, hand its
+linked decisions to `to-spec-qu1r0ra`.

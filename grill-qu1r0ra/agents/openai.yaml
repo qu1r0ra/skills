@@ -1,5 +1,3 @@
 interface:
   display_name: "Grill qu1r0ra"
-  short_description: "Grill through a decision; offer an ADR when it clears the bar"
-policy:
-  allow_implicit_invocation: false
+  short_description: "Grill material design choices; offer an ADR when warranted"

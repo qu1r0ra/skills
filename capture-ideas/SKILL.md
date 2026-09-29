@@ -86,4 +86,4 @@ sibling idea links.
 - Titles are independent human-readable metadata in conceptual sentence case. Do not encode capture dates, lifecycle states, or other mutable labels in filenames or titles.
 - Do not invent aliases, redirects, legacy filenames, or title-derived identities. A migration may record old-to-new mappings only in its migration history.
 
-When the user is ready to act on an entry, let them use `review-ideas` or explicitly choose a next flow (`grill-qu1r0ra`, `to-spec`, `to-tickets`, or `wayfinder`). This skill does not invoke those flows automatically.
+When the user is ready to act on an entry, let them use `review-ideas` or explicitly choose a next flow (`grill-qu1r0ra`, `to-spec-qu1r0ra`, `to-tickets`, or `wayfinder`). This skill does not invoke those flows automatically.

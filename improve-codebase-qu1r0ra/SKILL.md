@@ -57,6 +57,6 @@ Ask: "Which of these would you like to address?"
 
 ## 4. Grill
 
-Call `grill-qu1r0ra` on the chosen findings. Open with which findings and in what batches, ordered by the Sequencing lines. Decide technical calls yourself and put scope, claims a fix could change, and irreversible steps to the user. Interface design belongs to `/to-spec`. When the user chooses one finding, grill its design directly.
+Call `grill-qu1r0ra` on the chosen findings. Open with which findings and in what batches, ordered by the Sequencing lines. Decide technical calls yourself and put scope, claims a fix could change, and irreversible steps to the user. Interface design for AIOS belongs to `to-spec-qu1r0ra`. When the user chooses one finding, grill its design directly.
 
-When the grill finishes, offer `/to-spec` and `/to-tickets` and run neither unasked.
+When the grill finishes, offer `to-spec-qu1r0ra` for an AIOS spec and `/to-tickets` for an approved breakdown. Run neither without the user's request.

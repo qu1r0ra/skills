@@ -12,6 +12,8 @@ Recommend the local skill that matches the user's request:
 - An existing idea portfolio to review or triage: use `/review-ideas`.
 - Improvement candidates from recent local work across harnesses: use `/brainstorm-ideas`.
 - Engineering work that needs a Matt Pocock skill or flow: use `/ask-matt`.
+- An AIOS specification routed by Ask Matt to `/to-spec`: use
+  `/to-spec-qu1r0ra` for the central issue contract.
 - An AIOS effort routed by Ask Matt to `/wayfinder`: use
   `/wayfinder-qu1r0ra` so the map follows the central issue contract.
 

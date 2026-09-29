@@ -13,8 +13,8 @@ stable review, harness, and delivery policy to the upstream workflow.
 ## Run owner
 
 Read `docs/agents/implementation-contract.md` for the execution-ownership
-rule. The ticket's `Recommended run configuration` is the human's
-pre-invocation routing aid; apply the contract directly once this skill runs.
+rule. Use the live ticket's target, scope, and acceptance criteria to select
+the repository and delivery mode.
 
 ## 1. Apply the upstream implementation and review workflow
 
@@ -23,9 +23,12 @@ Read and follow the current upstream skill at:
 `C:\Users\Quirora\Documents\qu1r0raOS\agent-skills\skills\implement\SKILL.md`
 
 Treat that file as upstream-owned. Follow its implementation and testing steps.
-At its `/code-review` step, apply the review policy below. This upstream call
-is the Standards and Spec review for this implementation. Complete the
-upstream commit step after that review.
+For this wrapper, commit the complete scoped change before its `/code-review`
+step so the protected review skill's `<fixed-point>...HEAD` diff includes the
+implementation. Use the recorded branch base as the fixed point. Commit any
+repair before re-review, and review the resulting branch diff. An empty or
+incomplete diff is not a completed review. Apply the review policy below, then
+record the final commit and review receipt.
 
 Before review, read [`docs/agents/model-routing.md`](../../../docs/agents/model-routing.md)
 and the matching harness adapter:

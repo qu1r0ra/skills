@@ -1,5 +1,5 @@
 interface:
-  display_name: "Improve Codebase Architecture qu1r0ra"
+  display_name: "Improve Codebase qu1r0ra"
   short_description: "Audit correctness and architecture, then grill selected findings"
 policy:
   allow_implicit_invocation: false
