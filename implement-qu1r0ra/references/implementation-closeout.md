@@ -102,13 +102,13 @@ deleted branch is identified in the receipt.
 
 ## Update and close tickets
 
-Update the primary implementation ticket with the implementation commits,
+Update the primary implementation ticket (and, for a batch, every other ticket in it) with the implementation commits,
 landing or pull-request SHA, verification evidence, review-round/pair count,
 repair/re-review history, publication result, cleanup result, and remaining
 gates. Update directly
 affected blockers or dependents only when their state changed.
 
-Close the ticket only when its acceptance evidence is complete and no human or
+Close each ticket only when its own acceptance evidence is complete and no human or
 live gate remains. A merge or branch cleanup alone does not establish
 acceptance. Keep the issue open with the appropriate human-review state when a
 human gate remains. Verify state, labels, body/receipt, blockers, and target

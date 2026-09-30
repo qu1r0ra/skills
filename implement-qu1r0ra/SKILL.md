@@ -48,7 +48,7 @@ report and do not create tasks, chats, threads, forks, worktrees, branches,
 handoffs, or further reviewers. The matching adapter defines the reviewer
 selector and unavailable-lane receipt for that harness.
 
-Count complete Standards+Spec reviewer pairs as review rounds for the ticket.
+Count complete Standards+Spec reviewer pairs as review rounds for the ticket or batch.
 The round budget is global, including re-review after a repair:
 
 - Rounds 1 through 3 are allowed review rounds. Reuse the last pair for
