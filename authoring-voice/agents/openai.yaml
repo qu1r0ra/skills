@@ -1,3 +1,5 @@
 interface:
   display_name: "Authoring Voice"
-  short_description: "Apply author voice to substantive prose"
+  short_description: "Apply your writing voice on explicit request"
+policy:
+  allow_implicit_invocation: false

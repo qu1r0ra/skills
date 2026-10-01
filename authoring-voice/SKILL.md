@@ -1,6 +1,7 @@
 ---
 name: authoring-voice
-description: Apply the user's Authoring Bundle when drafting, revising, or reviewing substantive prose on the user's behalf; use for English academic or thesis prose as well as other author-directed writing.
+description: Apply the user's writing voice to prose intended to carry their authorship.
+disable-model-invocation: true
 ---
 
 # Authoring Voice
@@ -8,11 +9,24 @@ description: Apply the user's Authoring Bundle when drafting, revising, or revie
 Use the Authoring Bundle to make author-directed prose consistent without
 overriding the task, evidence, audience, or required house style.
 
+## Invocation and scope
+
+Run only when the user explicitly invokes this skill or requests their writing
+voice. Drafting prose alone does not authorize the bundle or its Humanizer pass.
+Use it for prose intended to carry the user's authorship, such as a paper,
+thesis, essay, or personal correspondence.
+
+Engineering artifacts use their technical workflow: code, specifications,
+tickets, ADRs, README/setup documentation, commit messages, PR descriptions,
+skills, agent instructions, audits, and operations documents. Apply authoring
+voice to such an artifact only when the user explicitly requests it for that
+artifact. In mixed tasks, apply the bundle only to the requested authored prose.
+
 ## Procedure
 
-1. Confirm that the work is substantive prose written on the author's behalf.
-   For code, quoted third-party text, or a purely factual extract, do not load
-   this skill unless the task also asks for author-directed prose.
+1. Confirm the explicit request and the prose it covers before loading profiles
+   or editorial skills. Quoted third-party text and factual extracts retain
+   their source wording or extraction requirements.
 2. Read `qu1r0raOS-wikis/authoring/profiles/core-writing-voice.md`.
 3. For English academic or thesis prose, also read
    `qu1r0raOS-wikis/authoring/modes/academic-writing.md`. Read
@@ -28,7 +42,7 @@ overriding the task, evidence, audience, or required house style.
    conclusion, perform the mode's claim–evidence–limitation check. Inspect a
    rendered artifact whenever its formatting, cross-references, tables,
    figures, or template behavior affects the result.
-7. For every substantive prose draft, review, or revision, invoke the
+7. For the authored prose covered by this explicit request, invoke the
    `humanizer` skill after loading this bundle and the applicable mode. Treat
    Humanizer as the final editorial task before delivery. Use Humanizer's
    embedded mode for this internal pass, so this workflow receives only the
