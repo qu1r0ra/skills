@@ -62,6 +62,6 @@ schedule work, or invoke `review-ideas` or any named follow-up skill.
 
 5. Report the report path, selected idea IDs, and any blocked boundary. Stop
    after local persistence; a user may separately invoke `review-ideas`,
-   `grill-qu1r0ra`, `to-spec-qu1r0ra`, `to-tickets`, or `wayfinder`. Completion means
-   the report, selected IDs, and any blocked boundary are clear, with no
-   Reflection mutation or external effect.
+   `grill-qu1r0ra`, `to-spec-qu1r0ra`, `to-tickets-qu1r0ra`, or `wayfinder-qu1r0ra`.
+   Completion means the report, selected IDs, and any blocked boundary are
+   clear, with no Reflection mutation or external effect.

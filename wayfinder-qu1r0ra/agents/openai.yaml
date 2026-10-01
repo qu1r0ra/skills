@@ -1,5 +1,5 @@
 interface:
   display_name: "Wayfinder qu1r0ra"
-  short_description: "Map a large AIOS decision effort in GitHub Issues"
+  short_description: "Map repository decisions with AIOS tracker routing"
 policy:
   allow_implicit_invocation: false

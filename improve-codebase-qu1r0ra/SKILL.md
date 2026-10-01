@@ -1,6 +1,6 @@
 ---
 name: improve-codebase-qu1r0ra
-description: "Personal wrapper: audit a whole codebase across correctness, deepening, proof, and drift, report one ranked Markdown list in chat (no HTML), then grill which findings to address and in what batches."
+description: "Audit a codebase across correctness, deepening, proof, and drift; report ranked Markdown findings and grill the selected work."
 disable-model-invocation: true
 ---
 
@@ -17,7 +17,18 @@ dimension below; this wrapper replaces its steps 2 and 3.
 
 A named direction from the user narrows every dimension to that module, subsystem, or pain point. Otherwise cover the whole repo; recent history sets the reading order only.
 
-Read the domain material `docs/agents/domain.md` routes to, and the ADRs at the nearest Git root. When the repo already has a plan from an earlier audit (a spec, open tickets, or draft ADRs), read [`EXISTING-PLAN.md`](EXISTING-PLAN.md) before dispatching; it extends steps 1 to 4 and adds step 5. Read `docs/agents/model-routing.md` for the worker pair; it is the only model preference source. Dispatch one read-only leaf subagent per dimension, in parallel. Each worker reports to the parent and stops, using one entry shape: title, dimension, files with `file:line`, evidence.
+Follow the nearest Git root's domain contract when present; otherwise read its
+glossary and relevant ADRs as upstream requires. For AIOS, read
+[domain.md](../../../docs/agents/domain.md). When an earlier audit already has
+a spec, open tickets, or draft ADRs, read [EXISTING-PLAN.md](EXISTING-PLAN.md)
+before dispatching; it extends steps 1 to 4 and adds step 5.
+
+Read the [shared model-routing policy](../../../docs/agents/model-routing.md)
+for the worker pair. Dispatch one read-only leaf subagent per dimension, in
+parallel within available concurrency. If the pinned pair or a leaf worker is
+unavailable, report that lane as blocked; deterministic parent checks do not
+count as its independent report. Each worker reports to the parent and stops,
+using one entry shape: title, dimension, files with `file:line`, evidence.
 
 Each finding has one owning dimension:
 
@@ -28,9 +39,15 @@ Each finding has one owning dimension:
 | Proof | unverified: behaviour with no check, or a check too weak to show that a change to it is safe | the check that exists, or the check that is missing |
 | Drift | misdescribed: docs, ADRs, contracts, and comments that disagree with the code | two conflicting quotes; Drift reports the disagreement and hands the finding to Correctness when the code is the side that is wrong |
 
-When a dimension's scope exceeds what one worker can read, shard it by top-level directory. Each shard owes the completion criterion for its directories, and the parent merges shard reports before reconciling.
+When a dimension needs separate ownership for exhaustive coverage, shard it
+by top-level directory. Each shard owes the completion criterion for its
+directories, and the parent merges shard reports before reconciling. Worker
+concurrency limits scheduling, not coverage; workers can compact and continue.
 
-Completion: every worker report accounts for every top-level module or directory in its scope, with findings or "reviewed, none".
+Completion: every worker report accounts for every top-level module or
+directory in its scope, with findings or "reviewed, none". If a lane is blocked,
+identify its uncovered scope and carry that gap into the report; the audit
+remains partial until coverage is complete.
 
 ## 2. Reconcile
 
@@ -63,9 +80,11 @@ and tracker offer, and the selected findings are identified or await a reply.
 
 ## 4. Grill
 
-Call `grill-qu1r0ra` on the chosen findings. Open with which findings and in what batches, ordered by the Sequencing lines. Decide technical calls yourself and put scope, claims a fix could change, and irreversible steps to the user. Interface design for AIOS belongs to `to-spec-qu1r0ra`. When the user chooses one finding, grill its design directly.
+Call `grill-qu1r0ra` on the chosen findings. Open with which findings and in what batches, ordered by the Sequencing lines. Decide technical calls yourself and put scope, claims a fix could change, and irreversible steps to the user. When the user chooses one finding, grill its design directly.
 
-When the grill finishes, offer `to-spec-qu1r0ra` for an AIOS spec and `/to-tickets` for an approved breakdown. Run neither without the user's request.
+When the grill finishes, offer `to-spec-qu1r0ra` for a repository-owned spec and
+`/to-tickets-qu1r0ra` for an approved breakdown. Run neither without the user's
+request.
 
 Completion: the chosen findings and batch order are settled, and the user has
 the applicable next-step offer.

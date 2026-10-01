@@ -1,0 +1,5 @@
+interface:
+  display_name: "To Tickets qu1r0ra"
+  short_description: "Plan fewer tickets with clear dependencies and execution order"
+policy:
+  allow_implicit_invocation: true

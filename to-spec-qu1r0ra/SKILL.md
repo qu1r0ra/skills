@@ -1,32 +1,35 @@
 ---
 name: to-spec-qu1r0ra
-description: Turn an AIOS design conversation into a spec and a validated central issue draft when the user asks for a spec or a completed design flow hands off to one.
+description: Synthesize a design conversation into a repository-owned spec, using the central draft-validation and publication contract for AIOS work.
 ---
 
 # To Spec qu1r0ra
 
-Use this wrapper for an AIOS-owned specification. This wrapper owns the AIOS
-workflow. Read the protected [`to-spec`](../to-spec/SKILL.md) as a reference for
-repository exploration, test seams, synthesis, and the spec template. Follow
-the central issue contract for publication.
+Follow [`to-spec`](../to-spec/SKILL.md) for exploration, test-seam confirmation,
+synthesis, and the spec template. This wrapper changes the publication route
+when the repository defines one; it adds no design interview.
 
-Before creating a central issue, read
-[`docs/agents/issue-tracker.md`](../../../docs/agents/issue-tracker.md) and the
-local [`aios-github-tickets`](../../../.agents/skills/aios-github-tickets/SKILL.md)
-skill. Route an implementation issue to its repository-owned tracker when that
-repository has one; use the central tracker for AIOS-owned or coordinating work.
+## Owning repository
 
-1. Draft the spec from the conversation and relevant domain material. Confirm
-   the test seams as the upstream reference requires. Add the central issue
-   contract's routing labels, target, scope, blockers, and verification
-   expectations. A publishable shaped spec uses `ready-for-agent`. Completion:
-   the draft covers every upstream spec section and AIOS issue requirement.
-2. Follow the draft validation and packet review steps in **Shaped issue
-   publication** in the central issue tracker contract. Completion: the exact
-   publication packet passes validation and has been shown to the user.
-3. Follow that contract's approval and publication branch. Completion: the user
-   has the identified unpublished draft or the verified live issue, with its
-   identity and any remaining gate stated.
+Identify the nearest Git root and the work's owning tracker. Follow that
+repository's spec format and publication contract when defined; otherwise use
+upstream's template and tracker route. Keep its tracker-setup gate when no
+destination is configured.
 
-Spec approval covers this publication packet. Implementation and a later ticket
-breakdown require their own instructions.
+## AIOS branch
+
+For AIOS-owned or coordinating work, read the
+[central issue contract](../../../docs/agents/issue-tracker.md) and local
+[`aios-github-tickets`](../../../.agents/skills/aios-github-tickets/SKILL.md).
+Repository-owned implementation work stays on its repository's tracker.
+
+Add the central contract's routing and verification fields to the upstream
+spec. Replace upstream's immediate publication with **Shaped issue
+publication**: validate the exact draft, show the complete packet, obtain
+approval, and verify any authorized publication. A draft remains a valid
+outcome when publication is awaiting approval.
+
+Completion: the user has the identified unpublished draft or verified live
+spec, covering every required section and test-seam decision, with any
+remaining gate stated. Spec approval covers only that publication packet;
+implementation and ticket breakdown require their own instructions.

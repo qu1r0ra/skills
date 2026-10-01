@@ -24,14 +24,15 @@ Grill only `new` and `conflicts` entries. Open the grill by listing the covered 
 
 ## Step 5: update the plan
 
-1. **Choose patch or rebuild.** Count the open tickets that the grill's decisions supersede or restructure. At about a third of the open tickets or more, rebuild through `/to-spec-qu1r0ra` and `/to-tickets`. Below that, patch.
-2. **Draft the patch** as local files, one per issue body:
-   - Edit the spec in place. Add a pointer to the audit issue, and add the new stories and decisions.
+1. **Choose patch or rebuild.** Count the open tickets that the grill's decisions supersede or restructure. At about a third of the open tickets or more, rebuild through `/to-spec-qu1r0ra` and `/to-tickets-qu1r0ra`. Below that, patch.
+2. **Draft the patch** as local files, one per issue body, using the owning repository's format and tracker contract:
+   - Draft the spec update. Link the published audit issue, or the saved report when unpublished, and add the new stories and decisions. Use an approved adjacent reference when the spec is frozen.
    - Write each new ticket with its blocked-by links.
    - Add acceptance lines and blocked-by links to existing tickets.
    - Mark superseded tickets to close as not planned. Keep every issue; closing preserves the record.
+   - Update the execution map through `to-tickets-qu1r0ra`, keeping it consistent with the proposed blocker edges.
 3. **Confirm** the final list of edits, new tickets, and closures with the user before publishing.
 4. **Check drift** just before each edit: fetch the live body and compare it with the copy the draft started from, ignoring trailing CR. Stop and reconcile any body that changed.
-5. **Publish** in dependency order: new tickets first, so their numbers exist, then edits to existing tickets, then the spec.
+5. **Publish** under the repository's approval rules: new tickets in dependency order first, then edits to existing tickets, approved closures, and the spec or adjacent reference. Replace provisional map names with actual ticket IDs and verify the blocker edges.
 
 Completion: every confirmed edit, new ticket, and closure is live, and each blocked-by link resolves to an existing issue.

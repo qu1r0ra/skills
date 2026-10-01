@@ -5,28 +5,20 @@ description: Grill the user through a material, user-owned design decision when 
 
 # Grill qu1r0ra
 
-Use this personal wrapper when the user asks to be grilled or a material,
-user-owned design choice needs an interview. Make routine technical choices
-without starting this workflow. It uses the `grilling` interview and reads the
-ADR offer criteria from `domain-modeling/ADR-FORMAT.md`.
+Follow [`grilling`](../grilling/SKILL.md) for the interview, frontier, and
+confirmation gate. Apply this wrapper when the user asks to be grilled or a
+material, user-owned choice blocks a reliable outcome; make routine technical
+choices directly.
 
-## 1. Interview
+Send interview questions in ordinary chat prose with recommendations. This
+replaces upstream's question formatting; use no question cards.
 
-Call the `grilling` skill on the topic. Work the frontier to an empty state and get the user's confirmation, exactly as that skill defines. Send each interview question in ordinary chat prose with your recommendation. Do not use `AskUserQuestion` or other question cards.
+After the confirmed decision, check the offer criteria in
+[`ADR-FORMAT.md`](../domain-modeling/ADR-FORMAT.md). Offer an ADR only when all
+three criteria hold; write it only after the user accepts. Keep this interview
+free of glossary maintenance. If the user explicitly requests the documented
+interview workflow, use [`grill-with-docs`](../grill-with-docs/SKILL.md).
 
-Completion: the frontier is empty and the user has confirmed the decision.
-
-## 2. Offer an ADR
-
-Once the interview settles a decision, check it against the offer criteria and template at:
-
-`../domain-modeling/ADR-FORMAT.md`
-
-Offer to write the ADR only when all three criteria hold. Otherwise, say nothing about it.
-
-Completion: the criteria have been checked and any warranted ADR offer has
-been made.
-
-## Out of scope
-
-This skill never touches `CONTEXT.md` and never challenges terminology. For that, use `grill-with-docs`.
+Completion: the decision frontier is empty, the user has confirmed the shared
+understanding, and any warranted ADR offer has been made. An unanswered
+decision or pending confirmation keeps the interview open.

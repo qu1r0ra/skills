@@ -8,8 +8,11 @@ state.
 
 Identify the nearest Git root, the supervising checkout, the integration
 branch (normally `main`), the implementation branch/worktree, the delivery
-mode, and the affected ticket before mutating anything. Read the repository's
-implementation contract and issue-tracker instructions.
+mode, and any affected ticket before mutating anything. Read the repository's
+implementation contract and issue-tracker instructions when defined. Without
+a repository contract, prepare an isolated branch/worktree for this closeout
+and use the upstream implementation workflow. Apply ticket steps only when
+the implementation has an associated ticket.
 
 The implementation worktree must be clean, registered, and on the exact issue
 branch. The implementation must have a committed receipt with scoped checks,

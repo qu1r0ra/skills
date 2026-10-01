@@ -1,34 +1,23 @@
 ---
 name: find-docs-qu1r0ra
-description: Use when an AIOS library documentation lookup or third-party library code change needs current docs. Prefer the Context7 CLI when shell access is available; use connected MCP tools when CLI is unavailable or a better fit.
+description: Retrieve current library documentation before answering API questions or changing third-party library code, preferring Context7 CLI with MCP and official-documentation fallbacks.
 ---
 
-# Context7 for AIOS
+# Find Docs qu1r0ra
 
-Use this route for library documentation questions in AIOS and before editing
-code that depends on a third-party library. Read the protected
-[`find-docs`](../find-docs/SKILL.md) for library selection, version matching,
-query wording, and result limits. This wrapper owns route choice.
+Follow [`find-docs`](../find-docs/SKILL.md) for query construction, library
+resolution, version selection, and documentation retrieval. Apply the owning
+repository's documentation contract when present. This wrapper changes only
+route choice and the fallback.
 
-1. Form a specific, secret-free query about the API, configuration, or version
-   behavior needed for the task. Keep it to one concept unless the concepts
-   must be understood together. Complete when the library, version, and
-   question are clear enough to retrieve matching documentation.
-2. Prefer the upstream Context7 CLI flow when shell and Node/npm are already
-   available. Follow `find-docs` for its commands, mandatory library-resolution
-   step, result interpretation, and call limit. CLI + Skills and MCP are both
-   supported Context7 routes. The CLI can be a lower-overhead fit when the
-   harness already exposes shell, but this is not a measured token saving:
-   harnesses vary in MCP discovery and schema loading, and retrieved docs use
-   model context either way. Complete when the result matches the requested
-   library and version.
-3. Use connected Context7 MCP tools when CLI is unavailable, blocked, or a
-   better fit for the harness. Tool names vary; discover the exposed tools.
-   Reuse a known, version-matched library ID when the tool accepts it; otherwise
-   resolve the library once, then query its docs. Complete when the result
-   matches the requested library and version.
-4. If neither Context7 route is available or it has no matching entry, use the
-   library's official documentation. State which route supplied the answer;
-   for a code change, record any fallback in the handoff. Complete when the
-   answer is grounded in retrieved documentation or the missing source is
-   reported.
+- Prefer upstream's CLI flow when shell and Node/npm are already available.
+- Use connected Context7 MCP tools when CLI is unavailable, blocked, or a
+  better fit. Discover their names and follow their library-resolution contract.
+- If Context7 is unavailable, quota-limited, or lacks a matching entry, retrieve
+  the library's official documentation. This replaces upstream's training-data
+  fallback. Report the route and reason; for code changes, record the fallback
+  in the handoff. Installing tooling or setting up authentication requires
+  separate authorization.
+
+Completion: the answer cites retrieved documentation for the requested library
+and version, or identifies the unavailable source and remaining uncertainty.

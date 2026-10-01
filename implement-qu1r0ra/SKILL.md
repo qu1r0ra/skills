@@ -6,87 +6,40 @@ disable-model-invocation: true
 
 # Implement qu1r0ra
 
-Use this personal wrapper when implementing a defined specification or ticket.
-The invoking agent owns the implementation. This wrapper adds the user's
-stable review, harness, and delivery policy to the upstream workflow.
+Follow [`implement`](../implement/SKILL.md) for implementation, testing, and
+review. This wrapper changes execution ownership, review ordering, and
+closeout. The invoking agent implements directly; `implement-spec` is a
+separate, explicitly selected orchestration workflow.
 
-## Run owner
+## Repository route
 
-Read `docs/agents/implementation-contract.md` for the execution-ownership
-rule. Use the live ticket's target, scope, and acceptance criteria to select
-the repository and delivery mode.
+Identify the target Git root and follow its implementation and tracker
+contracts when present. For AIOS tickets, read the
+[implementation contract](../../../docs/agents/implementation-contract.md);
+it owns isolation and delivery mode. Outside AIOS, use repository-defined
+rules, falling back to the upstream workflow where no contract exists. Apply
+this wrapper's review and closeout preferences within that delivery mode.
 
-## 1. Apply the upstream implementation and review workflow
+## Review
 
-Read the protected [`implement`](../implement/SKILL.md) as the implementation
-and review reference. This wrapper owns the invocation and uses its
-implementation and testing steps.
-For this wrapper, commit the complete scoped change before its `/code-review`
-step so the protected review skill's `<fixed-point>...HEAD` diff includes the
-implementation. Use the recorded branch base as the fixed point. Commit any
-repair before re-review, and review the resulting branch diff. An empty or
-incomplete diff is not a completed review. Apply the review policy below, then
-record the final commit and review receipt.
+Commit the complete scoped change before upstream's code-review step, so its
+fixed-point-to-HEAD diff contains the implementation. Use the recorded branch
+base as the fixed point. Commit repairs before re-review; review the resulting
+branch diff rather than an empty or partial diff.
 
-Before review, read [`docs/agents/model-routing.md`](../../../docs/agents/model-routing.md)
-and the matching harness adapter:
+Read [review-policy.md](references/review-policy.md) for the leaf-worker
+adapters, model routing, round budget, and required receipt. Completion:
+verification evidence and the final commit are recorded, and the review
+receipt accounts for both axes, repairs, rounds, and remaining gates.
 
-- Antigravity: `references/harness-antigravity.md`
-- Claude Code: `references/harness-claude-code.md`
-- Codex: `references/harness-codex.md`
+## Closeout
 
-`model-routing.md` is the only preference source for the exact worker model and
-effort. The harness adapter supplies the dispatch mechanism and must enforce
-the pair listed there; if the current harness has no adapter or the pair is
-unavailable, preserve the review lane as blocked.
+Continue through the [closeout procedure](references/implementation-closeout.md)
+for the selected delivery mode unless the user requested handoff-only
+retention. Repository publication and human-acceptance gates still apply.
+Completion: the change is landed or has a named gate, temporary Git state is
+accounted for, and any affected ticket has a verified, accurate receipt.
 
-### Review policy for the upstream `/code-review` step
-
-Request independent Standards and Spec reviews when the
-harness provides real leaf workers. Reviewers return one bounded, read-only
-report and do not create tasks, chats, threads, forks, worktrees, branches,
-handoffs, or further reviewers. The matching adapter defines the reviewer
-selector and unavailable-lane receipt for that harness.
-
-Count complete Standards+Spec reviewer pairs as review rounds for the ticket or batch.
-The round budget is global, including re-review after a repair:
-
-- Rounds 1 through 3 are allowed review rounds. Reuse the last pair for
-  back-and-forth repair/re-review when continuity is useful, and count each
-  completed re-review as the next round rather than silently resetting the
-  budget.
-- After a round reports a P1, repair the finding and re-review the changed
-  scope before declaring completion. A round is complete only when both axes
-  return their bounded report.
-- Round 4 is one backup round after the three-round budget, authorized only
-  when Round 3 still has an unresolved P1, or when a critical review lane was
-  unavailable or materially conflicted during the allowed rounds. Record the
-  trigger and the repair/re-review history before dispatching Round 4.
-- If a P1 remains after Round 4, stop the review loop and report the named
-  unresolved risk for human or owner intervention. Do not dispatch Round 5 or
-  silently create replacement pairs.
-
-Completion: the scoped implementation is committed on its dedicated branch,
-verification evidence is available, and the receipt states the total
-review-round/pair count, resolved reviewer configuration, each repair and
-re-review trigger, final P1 disposition, and any Round 4 trigger.
-
-## 2. Complete the implementation closeout
-
-After the implementation commit and review, apply the shared
-[implementation closeout procedure](references/implementation-closeout.md).
-
-Do not stop at “committed and reviewed” and ask the user to repeat the landing
-request. Unless the user explicitly requested handoff-only retention, continue
-through the closeout procedure's selected delivery mode and failure branches.
-
-Completion: the implementation is landed or has a named unresolved gate, the
-secondary worktree/branch state is verified, and the affected ticket receipt
-is live and accurate.
-
-## 3. Final receipt
-
-Report implementation commits, review-pair count, tests, landing commit,
-publication result, retired worktrees and branches, ticket state, and any
-remaining human or technical gate. Do not claim ticket closure from landing
-alone. Completion: the receipt names every verified result and unresolved gate.
+Report implementation commits, review-pair count, checks, landing commit,
+publication result, retired worktrees and branches, ticket state, and remaining
+gates. Ticket closure follows its acceptance evidence.
