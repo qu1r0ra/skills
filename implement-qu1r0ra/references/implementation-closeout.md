@@ -15,13 +15,12 @@ and use the upstream implementation workflow. Apply ticket steps only when
 the implementation has an associated ticket.
 
 The implementation worktree must be clean, registered, and on the exact issue
-branch. Finalize committed candidate notes before final verification. They
-name scoped checks, the full-suite command or exception, review-round/pair
-count, repair history, and remaining gates. The check artifact records the
-final checked revision and process outcome; later delivery and cleanup
-outcomes go in a runtime receipt and the live issue comment. Follow the
-repository's receipt contract when defined. Recording success alone does not
-require amending the verified candidate.
+branch. Follow the repository's receipt contract when defined. Without one,
+finalize committed candidate notes before final verification: scoped checks,
+full-suite command or exception, review-round/pair count, repair history, and
+remaining gates. Record final revision and process evidence in the check
+artifact; later delivery and cleanup outcomes belong in a runtime receipt and
+live issue comment. Recording success alone does not require an amendment.
 
 Completion: all identities resolve to the intended repository, ticket, branch,
 worktree, and delivery mode.
