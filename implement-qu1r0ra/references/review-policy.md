@@ -23,6 +23,20 @@ handoffs, or further reviewers. The matching adapter defines the reviewer
 selector and unavailable-lane receipt for that harness.
 
 Count complete Standards+Spec reviewer pairs as review rounds for the ticket or batch.
+Before dispatch, record the fixed base, committed candidate, spec source,
+standards sources, pair configuration, and round number in one runtime review
+checkpoint. Give each reviewer that comparison and the unresolved findings
+from its axis. A report remains evidence for that candidate; an amendment is
+a new candidate, not a reason to reset the round counter.
+
+For repair review, record the previous candidate and changed paths. Review
+the repair and integration effects, carrying forward unchanged findings.
+Reuse an unchanged scope's report only when its code, requirements, standards,
+and integration assumptions are identical. Review new requirements and
+changed integration explicitly. Stop dispatching when both axes have completed
+the required review and no finding requires another round. Route mechanically
+decidable rules to deterministic checks; reserve standards for judgement.
+
 The round budget is global, including re-review after a repair:
 
 - Rounds 1 through 3 are allowed review rounds. Reuse the last pair for

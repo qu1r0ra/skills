@@ -15,9 +15,13 @@ and use the upstream implementation workflow. Apply ticket steps only when
 the implementation has an associated ticket.
 
 The implementation worktree must be clean, registered, and on the exact issue
-branch. The implementation must have a committed receipt with scoped checks,
-full-suite evidence or an explicit exception, review-round/pair count,
-repair/re-review history, and remaining gates.
+branch. Finalize committed candidate notes before final verification. They
+name scoped checks, the full-suite command or exception, review-round/pair
+count, repair history, and remaining gates. The check artifact records the
+final checked revision and process outcome; later delivery and cleanup
+outcomes go in a runtime receipt and the live issue comment. Follow the
+repository's receipt contract when defined. Recording success alone does not
+require amending the verified candidate.
 
 Completion: all identities resolve to the intended repository, ticket, branch,
 worktree, and delivery mode.
@@ -26,6 +30,9 @@ worktree, and delivery mode.
 
 1. Inspect the supervising checkout's branch, status, worktrees, remotes, and
    implementation diff.
+   For AIOS, use `implementation-preflight --closeout` as documented in the
+   implementation contract. Refresh remote refs separately before landing
+   and select only authorized targets.
 2. Preserve unrelated changes in the supervising checkout. Compare changed
    paths and the implementation diff; proceed only when the dirty paths are
    disjoint from the implementation landing. Stop before merge when they
