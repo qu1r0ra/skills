@@ -25,11 +25,18 @@ Repository-owned implementation work stays on its repository's tracker.
 
 Add the central contract's routing and verification fields to the upstream
 spec. Replace upstream's immediate publication with **Shaped issue
-publication**: validate the exact draft, show the complete packet, obtain
-approval, and verify any authorized publication. A draft remains a valid
-outcome when publication is awaiting approval.
+publication**: once the design is settled under the upstream workflow, validate
+the exact draft, publish it under the standing central AIOS issue-publication
+authorization in `AGENTS.md`, and verify the live issue. Do not ask for separate
+approval to publish a validated packet. Preserve any approval needed to settle
+the design itself. If validation or publication fails, keep the draft and report
+the specific failure.
 
-Completion: the user has the identified unpublished draft or verified live
-spec, covering every required section and test-seam decision, with any
-remaining gate stated. Spec approval covers only that publication packet;
-implementation and ticket breakdown require their own instructions.
+Prefix every AIOS issue title created through this workflow with `[Spec]`,
+including decision specs. Follow it with a plain-language description of the
+spec's subject or outcome, for example `[Spec] Make specs easier to scan`.
+
+Completion: the user has the verified live spec URL, covering every required
+section and test-seam decision, or an identified draft with its validation or
+publication failure. Publication authorization does not authorize
+implementation; ticket breakdown follows its own instructions.

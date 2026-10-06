@@ -1,18 +1,21 @@
 ---
 name: todo
-description: "Capture one or more durable AIOS tasks as lightweight GitHub Issues."
+description: "Capture durable AIOS tasks as lightweight GitHub Issues without implementing them. Use on /todo or $todo."
 disable-model-invocation: true
 ---
 
 # Todo
 
-Use this skill only when the user explicitly invokes `/todo`. Capture durable
-AIOS work in the private central GitHub Issues tracker. This is an intake
-workflow, not a specification, vertical implementation ticket, or personal
-reminder system.
+Use this skill when the user explicitly invokes `/todo` or `$todo`. Capture
+durable AIOS work in the private central GitHub Issues tracker. This is an
+intake workflow only.
 
-Purely personal reminders remain outside this skill. Do not use this workflow
-for them.
+## Intake boundary
+
+- The sole deliverable is capturing and publishing the issue (or confirming the draft) on GitHub.
+- Never implement, execute, or initiate the captured work in the same session.
+- When the user's intent names another skill (such as `curate-writing-guide`), tool, command, or file, record that name faithfully as the subject of the issue; do not invoke the skill, inspect downstream repository files, or start framing.
+- Purely personal reminders remain outside this skill. Do not use this workflow for them.
 
 ## Clarify before capture
 
@@ -36,10 +39,10 @@ Do not invoke the full `grill-qu1r0ra` workflow automatically. If the round
 reveals an unresolved design or scope decision that needs deeper interrogation,
 pause and direct the user to explicitly invoke `/grill-qu1r0ra`.
 
-Clarification does not authorize implementation. A captured task is an intake
-record. An agent may inspect it, ask questions, gather bounded evidence, or
-prepare a proposed shape, but implementation requires a later shared
-understanding and explicit confirmation.
+Clarification does not authorize implementation or preliminary legwork. A
+captured task is an intake record. Ask only what is needed to capture the user's
+intention accurately; leave shaping, evidence gathering, file inspection, and
+execution for a later dedicated session.
 
 ## Shape the capture packet
 
@@ -97,7 +100,9 @@ understanding and explicit confirmation.
 5. Verify every published issue with `gh`, then run `just tickets --validate`.
    Return each issue's title, labels, number, and URL. A captured issue's
    receipt must state that it remains `needs-info` and is not implementation
-   authorization.
+   authorization. Done when each captured issue is published (or draft
+   confirmed) with `needs-info` and `type:task`, its live identity and URL are
+   returned, and the session stops without taking implementation steps.
 
 ## Migration and cleanup
 
