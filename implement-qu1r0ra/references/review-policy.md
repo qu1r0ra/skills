@@ -1,8 +1,11 @@
 # Implementation review policy
 
-Read this for the upstream code-review step in `implement-qu1r0ra`.
+Read this for the selected upstream code-review step in `implement-qu1r0ra`:
+the complete integrated branch for whole-spec mode, or the selected ticket or
+batch for direct mode. One delivery unit shares one global round budget.
 
-Before review, read [the shared model-routing policy](../../../../docs/agents/model-routing.md)
+Before review, read AIOS `docs/agents/model-routing.md` from the active AIOS
+checkout (or its supervising primary checkout when running outside AIOS)
 and the matching harness adapter:
 
 - Antigravity: `harness-antigravity.md`
@@ -22,7 +25,21 @@ report and do not create tasks, chats, threads, forks, worktrees, branches,
 handoffs, or further reviewers. The matching adapter defines the reviewer
 selector and unavailable-lane receipt for that harness.
 
-Count complete Standards+Spec reviewer pairs as review rounds for the ticket or batch.
+Count complete Standards+Spec reviewer pairs as review rounds for the delivery unit.
+Before dispatch, record the fixed base, committed candidate, spec source,
+standards sources, pair configuration, and round number in one runtime review
+checkpoint. Give each reviewer that comparison and the unresolved findings
+from its axis. A report remains evidence for that candidate; an amendment is
+a new candidate, not a reason to reset the round counter.
+
+For repair review, record the previous candidate and changed paths. Review
+the repair and integration effects, carrying forward unchanged findings.
+Reuse an unchanged scope's report only when its code, requirements, standards,
+and integration assumptions are identical. Review new requirements and
+changed integration explicitly. Stop dispatching when both axes have completed
+the required review and no finding requires another round. Route mechanically
+decidable rules to deterministic checks; reserve standards for judgement.
+
 The round budget is global, including re-review after a repair:
 
 - Rounds 1 through 3 are allowed review rounds. Reuse the last pair for

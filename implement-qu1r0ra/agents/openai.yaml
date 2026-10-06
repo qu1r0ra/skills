@@ -1,5 +1,5 @@
 interface:
   display_name: "Implement qu1r0ra"
-  short_description: "Implement with up to four review rounds and verified closeout"
+  short_description: "Implement whole specs or tickets with integrated review"
 policy:
   allow_implicit_invocation: false

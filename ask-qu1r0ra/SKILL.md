@@ -25,9 +25,11 @@ Recommend the local skill that matches the user's request:
 - A design interview routed to `/grill-me` or `/grill-with-docs`: recommend
   `/grill-qu1r0ra`. Keep `/grill-with-docs` when the user explicitly wants
   glossary maintenance or the documented interview workflow.
-- Direct implementation routed to `/implement`: use `/implement-qu1r0ra`.
-  `/implement-spec` is a separate, explicitly selected orchestration option;
-  its installation does not change direct implementation as the default.
+- Implementation routed to `/implement` or `/implement-spec`: recommend
+  `/implement-qu1r0ra`, the single personal entry point. Whole specs default
+  to upstream orchestration; selected tickets, batches, and explicit direct
+  requests use upstream direct execution. The user may invoke either upstream
+  skill directly to choose its behavior without personal overrides.
 
 Keep idea capture, review, and brainstorming separate from engineering workflow
 selection. This router names the user's next skill; let the user invoke it.
