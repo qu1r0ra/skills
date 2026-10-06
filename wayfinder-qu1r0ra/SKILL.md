@@ -33,9 +33,13 @@ authorized tracker write through its live validation route. Keep upstream's
 claim-before-work and resolution sequence, including the decision comment and
 title-linked map pointer.
 
+For central AIOS maps and decision children, publish settled, validated packets
+under the standing authorization in `AGENTS.md`; do not request a second
+approval to publish. Preserve decisions the user still needs to settle.
+
 When the map clears and the user asks for a buildable spec, hand its linked
 decisions to [`to-spec-qu1r0ra`](../to-spec-qu1r0ra/SKILL.md).
 
-Completion: the invoked upstream mode is complete or has a named gate; every
-authorized tracker change is verified. A publication gate leaves an identified
-draft and does not count as live charting or resolution.
+Completion: the invoked upstream mode is complete or has a named design gate;
+every authorized tracker change is verified. Keep invalid or failed-to-publish
+drafts identified as non-live; they do not count as live charting or resolution.

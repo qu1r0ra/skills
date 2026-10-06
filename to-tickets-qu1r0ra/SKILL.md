@@ -21,7 +21,7 @@ Batch 1: A, B (parallel candidates)
 Batch 2: C (blocked by A)
 ```
 
-After breakdown approval, put the lasting map in an editable parent or reference spec. This is a narrow exception to upstream's rule against modifying the parent: update only the approved map, preserving the parent's state and other content. If the document is frozen or unsuitable, use a repository-approved adjacent index. Follow the repository's publication gate for that update. Once tickets exist, replace provisional names with their actual IDs and verify that the map agrees with every blocker edge.
+After breakdown approval, put the lasting map in an editable parent or reference spec. This is a narrow exception to upstream's rule against modifying the parent: update only the approved map, preserving the parent's state and other content. If the document is frozen or unsuitable, use a repository-approved adjacent index. For AIOS, the approved map update and validated ticket issues follow the central issue-publication authorization; do not ask again to confirm publication. Once tickets exist, replace provisional names with their actual IDs and verify that the map agrees with every blocker edge.
 
 ## Repository formats and defaults
 
