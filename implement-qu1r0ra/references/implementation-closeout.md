@@ -6,8 +6,8 @@ state.
 
 ## Entry conditions
 
-Identify the nearest Git root, the supervising checkout, the integration
-branch (normally `main`), the implementation branch/worktree, the delivery
+Identify the nearest Git root, the supervising checkout, the
+destination branch (normally `main`), the delivery branch/worktree, the delivery
 mode, and any affected ticket before mutating anything. Read the repository's
 implementation contract and issue-tracker instructions when defined. Without
 a repository contract, prepare an isolated branch/worktree for this closeout
@@ -24,6 +24,13 @@ live issue comment. Recording success alone does not require an amendment.
 
 Completion: all identities resolve to the intended repository, ticket, branch,
 worktree, and delivery mode.
+
+Whole-spec remote-backed runs default to the wrapper's ready-for-user-review
+handoff. Enter landing only after that acceptance gate is satisfied or the
+user explicitly authorizes autonomous landing. Record a staging integration
+branch separately from the destination branch; integrated worker retirement
+does not retire the delivery checkout or close its tickets. Direct execution
+keeps this procedure's autonomous closeout within existing authorization.
 
 ## Preflight
 
@@ -63,22 +70,31 @@ Completion: the supervising branch contains the implementation through a
 verified merge commit, and publication is either verified or explicitly
 recorded as unavailable.
 
-## AIOS direct-to-main landing
+## AIOS pull-request landing
 
 For AIOS control-plane implementation, follow the repository's
-`docs/agents/implementation-contract.md` and use its direct-to-`main` path.
+`docs/agents/implementation-contract.md` and use its pull-request path. Create
+the implementation worktree directly beneath the supervising checkout's
+`.worktrees/` directory; preflight and retirement enforce this managed
+location.
 
-1. Verify the exact implementation commit and current `origin/main` ancestry.
-   Confirm the active rules for `main` permit a fast-forward direct push and
-   that no required check or human gate remains.
-2. Push the verified commit to `origin/main`. If `main` advanced, reconcile
-   the branch and rerun affected checks before pushing. Preserve the branch if
-   publication fails. Never force-push or bypass a repository rule.
-3. Verify the exact commit is reachable from `origin/main` and record its
-   commit SHA as the landing receipt.
+1. Push the verified feature branch and open a pull request to `main`. Preserve
+   the branch if publication fails; never force-push or bypass a repository
+   rule.
+2. Run focused local checks while iterating. The final pull-request candidate
+   must pass the required `just check` Actions run. Verify the active `main`
+   rules, exact PR head and base, and successful run with
+   `implementation-preflight --for-landing`. The candidate must report a clean
+   merge state against the current base under the strict rules. A changed head,
+   stale base, or non-clean merge state blocks readiness until current passing
+   evidence is available.
+3. Merge only after required automated gates pass and no human gate remains.
+   Verify the PR is merged, its tested head and base plus Actions run identity
+   are recorded, and its merge SHA is an ancestor of `origin/main`. The
+   post-landing check reuses this PR evidence; it does not rerun the full suite.
 
-Completion: the pushed commit is verified on `origin/main`, or a named
-publication or human gate remains and the feature state is preserved.
+Completion: the merged PR, required CI run, and merge SHA ancestry are verified,
+or a named publication or human gate remains and the feature state is preserved.
 
 ## Other remote-backed landing
 
@@ -98,10 +114,14 @@ technical gate remains and the feature state is preserved.
 ## Retire temporary Git state
 
 1. Remove only the exact clean registered implementation worktree after the
-   implementation is verified on the supervising branch or `origin/main`.
-2. Delete the corresponding local feature branch only after verifying its tip
-   is landed. Delete the remote feature branch after a verified pull-request
-   merge when the platform permits it.
+   implementation is verified on the supervising branch or `origin/main`. For
+   AIOS pull requests, verify the PR's tested head and passing required run,
+   then verify its merge SHA is an ancestor of `origin/main`.
+2. Delete the corresponding local feature branch only after verifying the
+   delivery receipt's exact feature head and merged PR lineage. The feature tip
+   need not be an ancestor of `main` after squash or rebase. Delete the remote
+   feature branch after a verified pull-request merge when the platform permits
+   it.
 3. Preserve the merge SHA and implementation receipt even after branch removal.
 4. Use no force removal. If cleanup fails, preserve the state and report the
    exact path or branch that remains.
@@ -125,6 +145,10 @@ routing through the live tracker after every mutation.
 
 Completion: the ticket's live state accurately reflects landed, published,
 accepted, and remaining-gate status.
+
+For an AIOS ticket under a `[Spec]` issue, follow the
+[parent-spec closeout rule](../../../../docs/agents/implementation-contract.md#parent-specification-closeout)
+after updating the ticket or batch.
 
 ## Failure states
 
