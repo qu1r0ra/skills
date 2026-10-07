@@ -1,0 +1,4 @@
+interface:
+  display_name: "Retro qu1r0ra"
+  short_description: "Run an evidence-grounded coding retrospective"
+  default_prompt: "Use $retro-qu1r0ra to review coding sessions and record evidence-backed candidates."
