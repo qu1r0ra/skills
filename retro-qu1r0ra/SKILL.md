@@ -37,8 +37,10 @@ authorized `--authorization-basis` and the assessed
 and do not retry with a weaker value. Acknowledge each returned chunk with
 `retro acknowledge` only after reviewing that exact chunk. Continue through
 all chunks, then call `retro review` with every acknowledged chunk ID for that
-exact source revision. A source revision change requires resume, fresh trace
-review, and new acknowledgements.
+exact source revision. Changed in-window evidence or its bounded surrounding
+context requires resume, fresh trace review, and new acknowledgements. A later
+append outside the frozen window preserves reviewed coverage when that
+evidence and context remain unchanged.
 
 Keep unsupported stores, malformed or untimed evidence, scanner failures, and
 analysis-obscuring redactions as visible gaps. Do not clear a gap from a
@@ -50,8 +52,9 @@ inactive or outside-window status has supporting local evidence.
 
 Apply upstream `retro`'s candidate categories. For each candidate, record a
 short sanitized summary, source evidence references, severity, and a current
-repository state check with citations. Refresh source references and current
-state after any source or repository revision change. Record each candidate's
+repository state check with citations bound to its Git root and full commit
+SHA. Refresh source references and current state after an affected evidence or
+repository revision change, then settle the disposition again. Record each candidate's
 accepted, deferred, dismissed, resolved, or superseded disposition with a
 rationale. Present meaningful candidates in severity order; a full review may
 produce no accepted changes.
