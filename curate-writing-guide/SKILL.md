@@ -29,7 +29,7 @@ Done when every gap is answered or sits under Open questions, and each lane has 
 
 ### 3. Reconcile
 
-Merge the findings by precedence: `requirement` over `authoritative guideline` over `empirical` over `convention` over `preference`. Where two rules conflict, the higher grade wins and the lower rule is dropped or scoped. Grade every rule using [entry.md](references/entry.md#grades). Grade a rule `authoritative guideline` only on a `verified` finding; an `unverified` one goes to gap-fill, or the rule grades as `convention`.
+Merge the findings by precedence: `requirement` over `authoritative guideline` over `empirical` over `convention` over `preference`. Where two rules conflict, the higher grade wins and the lower rule is dropped or scoped. Grade every rule using [entry.md](references/entry.md#grades). Grade a rule `authoritative guideline` only on a `verified` finding; an `unverified` one goes to gap-fill, and after gap-fill grades as `convention`.
 
 Done when every rule carries a grade and a source, and every `authoritative guideline` rule carries a quoted passage from a `verified` finding.
 
@@ -61,7 +61,7 @@ Write, using [entry.md](references/entry.md) and [project-guide.md](references/p
 
 Validate with `uv run python -m qu1r0raOS.validation workspace <root>`; the root is the AIOS checkout. Then run `uv run --no-project python scripts/check_guide.py quotes <entry>` and `parity <entry> <guide>` from this skill's directory.
 
-Done when validation passes, every quoted passage reports `found`, parity reports no difference, the project guide holds every item the template lists, and the pointer line names the guide and not this skill. Fix a `missing` passage or regrade its rule; send an `unchecked` one through the unreachable-page route under Failures.
+Done when validation passes, every quoted passage reports `found`, parity prints no `absent`, `grade differs`, or `no such rule` line, the project guide holds every item the template lists, and the pointer line names the guide and not this skill. Fix a `missing` passage or regrade its rule; send an `unchecked` one through the unreachable-page route under Failures.
 
 ### 7. Review
 
@@ -71,17 +71,17 @@ Done when the reviewer reports no Blocking finding. A Blocking finding that surv
 
 ## Revise
 
-1. Recheck only sources whose `recheck_by` has passed, any the author names, and any the author supplies for a rule. Run `check_guide.py quotes` on them. Update `checked_on`, `recheck_by`, and `status` for each.
+1. Recheck only sources whose `recheck_by` has passed, any the author names, and any the author supplies for a rule. Run `check_guide.py quotes` on the entry and read the lines for those sources. Update `checked_on`, `recheck_by`, and `status` for each.
 2. Re-reconcile only the rules those sources support (step 3), then re-run step 4 for the changed rules.
 3. Grill (step 5) on the changes only.
 4. Update the entry, the project guide, the revision line, and the log (step 6), then review the changed files (step 7).
 
-Done when every stale source is rechecked or marked `stale` and the entry and the project guide name the same revision.
+Done when every stale source is rechecked or marked `stale`, the entry and the project guide name the same revision, and the project guide's Existing instructions table is gone once the author has settled every row.
 
 ## Failures
 
 - **Dead link:** retry once, then search for the document's new location. Keep the rule with its source marked `stale` when none turns up, and report it.
-- **Unreachable page** (bot wall, 403, 429, paywall): fetch it through `web.archive.org/web/2026/<url>`. If that fails, confirm each remaining URL is live with `curl -I`, then ask the author once to paste the page text for all of them. Run pasted text through `check_guide.py quotes --page <url>=<file>` and tag it `verified`.
+- **Unreachable page** (bot wall, 403, 429, paywall): fetch it through the Wayback route in [lanes.md](references/lanes.md#shared-rules). If that fails, confirm each remaining URL is live with `curl -I`, then ask the author once to paste the page text for all of them. Run pasted text through `check_guide.py quotes --page <url>=<file>` and tag it `verified`.
 - **Blocked lane:** report it, mark coverage `partial` in the entry, and list the lane's unanswered questions under Open questions.
 - **Failed lane** (API or rate-limit error): redispatch it once after the limit resets, or run its questions inline, and name the choice under Coverage. A lane that fails twice counts as blocked.
 - **Validation failure on a fresh entry:** fix the entry and rerun; keep the previous bank and project guide untouched until validation passes. Report the validator's message when two reruns fail.
