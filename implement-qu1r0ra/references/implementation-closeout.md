@@ -118,10 +118,16 @@ technical gate remains and the feature state is preserved.
    AIOS pull requests, verify the PR's tested head and passing required run,
    then verify its merge SHA is an ancestor of `origin/main`.
 2. Delete the corresponding local feature branch only after verifying the
-   delivery receipt's exact feature head and merged PR lineage. The feature tip
-   need not be an ancestor of `main` after squash or rebase. Delete the remote
-   feature branch after a verified pull-request merge when the platform permits
-   it.
+   delivery receipt's exact feature head and merged PR lineage. For AIOS
+   squash or rebase delivery, follow the [local branch-retirement
+   procedure](../../../../docs/operations/worktree-retirement.md#local-branch-retirement):
+   verify the tested PR head and base, required checks, merge SHA on the
+   trusted base, and the branch tip's lineage to that tested head before using
+   `git branch -D`. Git ancestry alone does not establish that squash-delivered
+   work is unmerged. Remote feature-branch retirement remains governed by its
+   separate existing rule below.
+   Delete the remote feature branch after a verified pull-request merge when
+   the platform permits it.
 3. Preserve the merge SHA and implementation receipt even after branch removal.
 4. Use no force removal. If cleanup fails, preserve the state and report the
    exact path or branch that remains.
