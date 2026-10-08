@@ -71,7 +71,7 @@ Done when the reviewer reports no Blocking finding. A Blocking finding that surv
 
 ## Revise
 
-1. Recheck only sources whose `recheck_by` has passed, any the author names, and any the author supplies for a rule. Run `check_guide.py quotes` on the entry and read the lines for those sources. Update `checked_on`, `recheck_by`, and `status` for each.
+1. Recheck only sources whose `recheck_by` has passed, any the author names, and any the author supplies for a rule. Run `check_guide.py quotes` on the entry and read the lines for those sources; each `unchecked` line names the likely page to paste. When no source is stale and the author asks only for a quote check, stop after this step and record the result. Update `checked_on`, `recheck_by`, and `status` for each.
 2. Re-reconcile only the rules those sources support (step 3), then re-run step 4 for the changed rules.
 3. Grill (step 5) on the changes only.
 4. Update the entry, the project guide, the revision line, and the log (step 6), then review the changed files (step 7).

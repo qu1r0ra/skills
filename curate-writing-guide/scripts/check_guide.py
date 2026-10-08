@@ -44,6 +44,7 @@ class Passage:
     text: str
     line: int
     grade: str | None
+    label: str = ""
 
     @property
     def segments(self) -> list[str]:
@@ -103,9 +104,10 @@ def read_passages(path: Path) -> list[Passage]:
             block.append(lines[index])
             index += 1
         joined = straighten(" ".join(part.strip() for part in block))
+        label = joined.split('"', 1)[0]
         for found in re.findall(r'"([^"]+)"', joined):
             if len(found.strip()) >= MIN_PASSAGE:
-                passages.append(Passage(found.strip(), start + 1, grade))
+                passages.append(Passage(found.strip(), start + 1, grade, label))
     return passages
 
 
@@ -158,6 +160,13 @@ def fetch(url: str, work: Path) -> str | None:
     return None
 
 
+def likely_page(label: str, urls: list[str]) -> str | None:
+    words = {w for w in re.findall(r"[a-z]{4,}", label.lower())}
+    scored = [(len(words & set(re.findall(r"[a-z]{4,}", u.lower()))), u) for u in urls]
+    best = max(scored, default=(0, None))
+    return best[1] if best[0] else None
+
+
 def run_quotes(entry: Path, overrides: dict[str, Path]) -> int:
     urls = read_sources(entry)
     passages = read_passages(entry)
@@ -179,7 +188,9 @@ def run_quotes(entry: Path, overrides: dict[str, Path]) -> int:
             status = "unchecked" if unreachable else "missing"
         counts[status] += 1
         if status != "found":
-            print(f"{status}: {entry.name}:{passage.line}: {passage.text[:70]}")
+            hint = likely_page(passage.label, unreachable) if unreachable else None
+            suffix = f" (likely page: {hint})" if status == "unchecked" and hint else ""
+            print(f"{status}: {entry.name}:{passage.line}: {passage.text[:70]}{suffix}")
     for url in unreachable:
         print(f"unreachable: {url}")
     print(
