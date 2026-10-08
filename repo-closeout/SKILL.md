@@ -57,12 +57,14 @@ belongs to this task.
 
 ## Report
 
-Report each in-scope repository and the base ref used. List worktrees and local
-branches removed with verification, and every retained unmerged or uncertain
-item with its reason and any decision needed. Identify incomplete inspections;
-do not claim closeout is complete while a repository or item is unaccounted
-for.
+For each in-scope repository, report the base ref and commit used, then account
+for every inventoried worktree and local branch as removed or retained. Give
+each item its observed status, disposition reason, and verification result.
+For retained unmerged work, include unique commits when knowable, delivery
+evidence, and the merge-or-retain recommendation. Identify incomplete
+inspections; do not claim closeout is complete while any repository or item is
+unaccounted for.
 
-Completion: every in-scope repository has been inventoried, and every relevant
-worktree and branch is either verified removed or explicitly reported with its
-retention reason and next decision.
+Completion: every in-scope repository and its worktrees and local branches are
+accounted for, with a verified disposition for each item and any user decision
+still needed stated explicitly.
