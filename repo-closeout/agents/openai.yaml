@@ -1,0 +1,5 @@
+interface:
+  display_name: "Repo Closeout"
+  short_description: "Review and clean disposable Git state across task repos"
+policy:
+  allow_implicit_invocation: false
