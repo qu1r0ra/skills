@@ -51,20 +51,37 @@ belongs to this task.
    inventoried worktree is removed and verified absent, or retained with its
    observed state and reason.
 4. Delete a local branch only when it is not checked out, is not a protected,
-   default, or long-lived branch, and all its changes are verified in the
-   trusted delivery base by ancestry or the repository's delivery record.
-   Use ordinary `git branch -d`; never force-delete. Leave remote branches
-   untouched. A branch name or age alone is not proof that it is disposable.
+   default, or long-lived branch, and its work is verified in the trusted
+   delivery base. Use ordinary `git branch -d` when ancestry proves delivery.
+   When Git ancestry does not reflect a squash or rebase delivery, verify the
+   delivery record before using `git branch -D -- <branch>`:
+   - Confirm the pull request is merged to the trusted destination and that
+     its tested head and base, required check results, and merge commit are
+     recorded.
+   - Confirm the merge commit is an ancestor of the trusted delivery base.
+     The local branch tip must equal the tested PR head or be its ancestor. If
+     rewritten history breaks that relationship, require a delivery record
+     that identifies the exact local tip and verifies its change in the
+     merged result.
+   - Record the PR URL, local branch tip, tested head and base, check result,
+     and merge commit. If any identity or delivery evidence is missing, retain
+     the branch. This `-D` route deletes only the local ref; leave remote
+     branches untouched. Retire a checked-out worktree only through step 3
+     before deleting its branch. A branch name or age alone proves nothing.
+   In AIOS, also follow the [local branch-retirement
+   procedure](../../../docs/operations/worktree-retirement.md#local-branch-retirement).
    **Done when:** every inventoried local branch is deleted and verified
    absent, or retained with its observed state and reason.
-5. Preserve work with unmerged commits, local changes, untracked or ignored
-   files, uncertain ownership, or uncertain delivery status. For unmerged
-   work, report the repo, branch and worktree, unique commits when knowable,
-   and available delivery evidence. Recommend **merge** or **retain** with a
-   short reason, then wait for the user's decision. This workflow does not
-   merge, rebase, cherry-pick, push, open or update a PR, or delete remote
-   branches. **Done when:** each unmerged item has its status and evidence,
-   recommendation, and any pending user decision recorded.
+5. Preserve work with unverified commits, local changes, untracked or ignored
+   files, uncertain ownership, or uncertain delivery status. A branch whose
+   commits are outside the base ancestry is not unmerged when the delivery
+   record above verifies that work. For genuinely unmerged work, report the
+   repo, branch and worktree, unique commits when knowable, and available
+   delivery evidence. Recommend **merge** or **retain** with a short reason,
+   then wait for the user's decision. This workflow does not merge, rebase,
+   cherry-pick, push, open or update a PR, or delete remote branches. **Done
+   when:** each unmerged item has its status and evidence, recommendation, and
+   any pending user decision recorded.
 
 ## Report
 
