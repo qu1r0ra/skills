@@ -12,6 +12,7 @@ The project guide is self-contained: the project's agents follow it without the 
    - **Protection:** Humanizer never rewrites a `requirement` or `authoritative guideline` rule's wording or its effect, even to remove a tell.
 5. **Deviation rule:** the author may deviate from a `convention` or `preference` rule with a one-line reason in the draft. A deviation from a `requirement` or `authoritative guideline` rule needs the author's explicit approval for that passage.
 6. **Provenance:** the bank entry slug, its revision (the latest `checked_on` among the entry's sources, as `Revision: YYYY-MM-DD`), and a link to the wiki entry as `qu1r0raOS-wikis/writing/guides/<slug>.md`.
+7. **Existing instructions:** a table of the style rules the project already carries (prose rules in `AGENTS.md` or `CLAUDE.md`, `rules/` files, style skills), one row per rule: *absorbed* (the guide now holds it), *kept* (a process rule, not style), or *retired* (removed from its file). Repoint or delete any pointer to a missing file or skill. Edit an existing instruction file only with the author's permission. Revise deletes the table once the author confirms every row is settled.
 
 ## Usage index
 
