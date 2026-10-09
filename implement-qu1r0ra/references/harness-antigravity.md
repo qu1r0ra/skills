@@ -1,56 +1,36 @@
 # Antigravity harness adapter
 
-Operational rules when running under the Antigravity harness (`agy`).
+Before dispatch, read `docs/agents/model-routing.md` from the active AIOS
+checkout, or its supervising checkout when working elsewhere. It owns role
+preferences and dispatch evidence.
 
-## Planning execution
+## Native workers
 
-Treat the invoked specification or ticket as pre-authorizing implementation:
+Use the native subagent mechanism with the routed `flash` tier. Set high
+effort when the child interface exposes that control; otherwise record effort
+as harness-controlled. A tier selector does not establish an exact model
+version or resolved effort.
 
-- When creating an `implementation_plan.md` artifact, set `RequestFeedback: false`
-  in `ArtifactMetadata`.
-- Proceed immediately from plan generation into implementation and test
-  tooling after the selected workflow's design and ticket approvals are settled.
-- Never generate or update `walkthrough.md` artifacts; report completion and
-  verification directly in chat output and the final receipt.
-- Rely on the skill's integrated paired leaf-subagent review to catch drift
-  rather than an interactive planning gate.
+Native children start with fresh context. Pass the task, required rules and
+source pointers, and expected output. For writing workers, select an isolated
+workspace and verify its actual Git checkout, branch, and integration base
+against the target repository's isolation contract before edits.
 
-Completion: implementation tool calls begin immediately after plan artifact
-generation when prerequisite approvals are settled.
+Use normal harness workers for separate Standards and Spec reports; provide
+the fixed comparison and parent check results. Follow
+[review-policy.md](review-policy.md) for review rounds and completion.
 
-## Implementation workers
+## Other surfaces
 
-Read the active AIOS checkout's `docs/agents/model-routing.md` before dispatch.
-Inspect current `agy --help`, `agy models`, and native worker capabilities.
-CLI model availability and CLI effort flags do not prove that a native child
-accepts those controls. Native `invoke_subagent` definitions may expose only
-`inherit`, `flash`, or `pro` tiers. Use a tier only when its resolved child
-model and effort match the routed pair; otherwise leave that lane blocked.
+Headless CLI model/effort flags and `agy models` describe a separate launch
+surface. They do not establish native child resolution. Paseo ACP provider
+settings are another path; use its owning runbook for provider work.
 
-Use native isolated worker workspaces for implementation. Verify their Git
-registration, managed path, semantic branch, and integration base; a workspace
-option alone does not prove these. Pass explicit context pointers because
-native workers start with fresh context. Give mergers the integration checkout
-and serialize its writers. Give exploration workers write access only for
-their notes, or let the parent save their report. Keep review workers as leaves
-even when the provider permits nested delegation.
+Use native plan and completion artifacts under the active harness review
+policy. AIOS design and ticket approvals still apply; the adapter adds no
+artifact suppression or metadata override.
 
-Paseo ACP launch defaults are a different provider path; do not infer native
-worker routing from them. References:
-[native subagents](https://antigravity.google/docs/subagents) and
-[models](https://antigravity.google/docs/models/).
-
-## Independent review
-
-Use the harness's actual read-only leaf-worker mechanism for Standards and Spec
-review after implementation. Read `docs/agents/model-routing.md`, then verify
-that the current `agy --help` and `agy models` output expose the exact
-Antigravity pair listed there before dispatching. Pass that pair for every
-review and re-review worker when the native mechanism exposes those controls;
-otherwise verify the resolved pair as above. If the pair or independent review
-mechanism is unavailable, record the affected review lane as unavailable;
-deterministic parent verification may continue, but the receipt cannot claim
-the missing review.
-
-Completion: every dispatched review worker resolves to the exact Antigravity
-pair listed in `model-routing.md`, and its resolved values are recorded.
+For current capabilities, consult official
+[subagents](https://antigravity.google/docs/subagents?tab=cli),
+[headless CLI](https://antigravity.google/docs/cli/headless/), and
+[artifact review](https://antigravity.google/docs/cli/artifacts/) documentation.

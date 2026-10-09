@@ -5,25 +5,15 @@ the complete integrated branch for whole-spec mode, or the selected ticket or
 batch for direct mode. One delivery unit shares one global round budget.
 
 Before review, read AIOS `docs/agents/model-routing.md` from the active AIOS
-checkout (or its supervising primary checkout when running outside AIOS)
-and the matching harness adapter:
-
-- Antigravity: `harness-antigravity.md`
-- Claude Code: `harness-claude-code.md`
-- Codex: `harness-codex.md`
-
-`model-routing.md` is the only preference source for the exact worker model and
-effort. The harness adapter supplies the dispatch mechanism and must enforce
-the pair listed there; if the current harness has no adapter or the pair is
-unavailable, preserve the review lane as blocked.
+checkout, or its supervising primary checkout when working elsewhere. Follow
+its preferences, matching harness adapter, and dispatch evidence policy.
 
 ### Review policy for the upstream `/code-review` step
 
-Request independent Standards and Spec reviews when the
-harness provides real leaf workers. Reviewers return one bounded, read-only
-report and do not create tasks, chats, threads, forks, worktrees, branches,
-handoffs, or further reviewers. The matching adapter defines the reviewer
-selector and unavailable-lane receipt for that harness.
+Request separate Standards and Spec reports through the harness's normal
+subagent mechanism. Give reviewers the comparison and sources for their axis;
+the parent owns candidate changes and delivery. An unavailable worker mechanism
+leaves that review lane unavailable, with the reason recorded.
 
 Count complete Standards+Spec reviewer pairs as review rounds for the delivery unit.
 Before dispatch, record the fixed base, committed candidate, spec source,
@@ -59,5 +49,5 @@ The round budget is global, including re-review after a repair:
 
 Completion: the scoped implementation is committed on its dedicated branch,
 verification evidence is available, and the receipt states the total
-review-round/pair count, resolved reviewer configuration, each repair and
+review-round/pair count, reviewer dispatch evidence, each repair and
 re-review trigger, final P1 disposition, and any Round 4 trigger.
