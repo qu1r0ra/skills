@@ -6,14 +6,15 @@ preferences and dispatch evidence.
 
 ## Model and effort
 
-Resolve the child model in the documented order: the Agent call's `model`, the
-subagent definition's `model`, `CLAUDE_CODE_SUBAGENT_MODEL` (since v2.1.251 only
-when neither of those is set), then the session model. Use the routed full model ID
-in a subagent definition's `model` field, or in the call when its schema accepts
-it. A call that accepts only aliases takes one only when its mapping to the
-routed ID is established. An organization model restriction can substitute a
-fallback model: that substitution blocks the lane, and organization policy
-stands.
+The child model resolves in this order: the Agent call's `model`, the subagent
+definition's `model`, `CLAUDE_CODE_SUBAGENT_MODEL` (v2.1.251+), then the session
+model. Record which source set the routed model.
+
+Pass the routed full model ID in the call when its schema accepts one. When the
+call accepts only aliases, select a subagent definition whose `model` is the
+full ID; use an alias only when its mapping to the routed ID is established.
+With neither, the lane is blocked. An organization model restriction that
+substitutes a fallback model also blocks the lane.
 
 For explicit effort, pass the routed `effort` parameter to a non-fork Agent
 call (Claude Code v2.1.292+), or select a subagent definition with that
@@ -30,8 +31,7 @@ independently observed child resolution.
 ## Worker types and context
 
 Use `general-purpose` for writing workers and for Standards and Spec reviewers,
-following [review-policy.md](review-policy.md). Use `Explore` for exploration
-and routine research only. `Explore` and `Plan` omit the `CLAUDE.md` hierarchy
+following [review-policy.md](review-policy.md). `Explore` and `Plan` omit the `CLAUDE.md` hierarchy
 and Git status snapshot, and fresh children lack the parent conversation.
 Provide the required rules, fixed Git comparison, source pointers, and parent
 check results explicitly.
