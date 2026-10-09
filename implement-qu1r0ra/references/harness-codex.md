@@ -1,44 +1,30 @@
 # Codex harness adapter
 
-Operational rules when running under the Codex harness.
+Before dispatch, read `docs/agents/model-routing.md` from the active AIOS
+checkout, or its supervising checkout when working elsewhere. It owns role
+preferences and dispatch evidence; this adapter maps them to Codex controls.
 
-## Implementation workers
+## Launch controls
 
-Read the active AIOS checkout's `docs/agents/model-routing.md` before every
-dispatch. Use the actual child-worker API with explicit `model` and reasoning
-effort controls for exploration, implementation, merging, and repair roles.
-In the collaboration API, these are `model` and `reasoning_effort`; use a fresh
-or bounded context fork when a full-history fork cannot accept overrides.
-Check the current API's selectors and effort support before dispatch.
+For Codex-native subagents, set model and reasoning effort in the agent
+configuration supported by the installed runtime. Check the current
+[subagent documentation](https://learn.chatgpt.com/docs/agent-configuration/subagents)
+when configuring that surface; its configuration is distinct from a host's
+collaboration API.
 
-Give writing workers their exact worktree and integration base; launching a
-worker does not itself establish Git isolation. Exploration may return notes
-for the parent to save. Implementation and merger workers return commits and
-verification evidence; one writer owns the integration checkout at a time.
-Record the resolved model and effort, including any blocked lane. Continue
-through parent-owned integration, review, and delivery.
+When the collaboration API exposes `model`, `reasoning_effort`, and
+`fork_turns`, pass the routed model and effort explicitly. Use
+`fork_turns: "none"` with a self-contained assignment and context pointers when
+full-history forks cannot accept overrides. A task-name response proves
+acceptance, not independently resolved model or effort.
 
-## Independent review
+## Worker context
 
-Use the harness's actual leaf-subagent primitive for code review. Reviewers are
-read-only leaf workers: they do not create tasks, chats, threads, forks,
-worktrees, branches, handoffs, or further reviewers.
+Use the normal subagent mechanism for separate Standards and Spec reports.
+Give reviewers the fixed comparison, applicable sources, and parent check
+results. Follow [review-policy.md](review-policy.md) for review rounds and
+completion.
 
-In Codex, use a true subagent worker when available; visible Codex tasks,
-chats, forks, and threads are not reviewer substitutes. If the worker is
-unavailable, preserve that review lane as blocked and record the unavailable
-worker; the parent may continue deterministic verification but cannot claim the
-missing independent review.
-
-## Reviewer configuration
-
-Read `docs/agents/model-routing.md` before dispatching. For each Standards or
-Spec review and re-review, pass the exact model and effort pair listed there
-for Codex, using the worker API's explicit model and reasoning-effort controls.
-
-If the pinned pair is unavailable or rejected, preserve the affected review
-lane as blocked rather than substituting another selector. Record the resolved
-model and effort for every dispatched worker.
-
-Completion: every dispatched review worker resolves to the exact Codex pair
-listed in `model-routing.md`, and its resolved values are recorded.
+For writing workers, provide the exact checkout and integration base required
+by the target repository. A child thread or context fork does not establish
+Git isolation; verify the checkout before edits.

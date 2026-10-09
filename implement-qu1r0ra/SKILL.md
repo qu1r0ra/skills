@@ -36,7 +36,7 @@ implementation. Commit repairs before re-review. Whole-spec mode reviews the
 integrated branch once, followed only by necessary repair review; worker
 completion does not add a separate per-ticket PR review loop.
 
-Read [review-policy.md](references/review-policy.md) for leaf-worker adapters,
+Read [review-policy.md](references/review-policy.md) for harness dispatch,
 role routing, the global round budget, and the review receipt. Completion:
 both axes account for the committed delivery unit, repairs, rounds, and gates.
 
