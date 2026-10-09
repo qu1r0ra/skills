@@ -7,7 +7,7 @@ preferences and dispatch evidence.
 ## Model and effort
 
 The child model resolves in this order: the Agent call's `model`, the subagent
-definition's `model`, `CLAUDE_CODE_SUBAGENT_MODEL` (v2.1.251+), then the session
+definition's `model`, `CLAUDE_CODE_SUBAGENT_MODEL`, then the session
 model. Record which source set the routed model.
 
 Pass the routed full model ID in the call when its schema accepts one. When the
