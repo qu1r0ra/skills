@@ -13,10 +13,16 @@ is established. Check effective settings and launching environment for
 overrides. A conflicting force setting or organization model substitution
 blocks the lane; respect organization policy.
 
-For inherited effort, omit the child effort override and record session effort
-from `/effort status` when available. Inspect `/tasks` for observed child model
-and effort; inherited effort may not be displayed. Keep session configuration
-distinct from independently observed child resolution.
+For explicit effort, pass the routed `effort` parameter to a non-fork Agent
+invocation when supported (Claude Code v2.1.292+), or select a subagent
+definition with that `effort` field. Check `CLAUDE_CODE_EFFORT_LEVEL`: it takes
+precedence over both controls, and a conflicting value blocks the lane.
+For inherited effort, omit the child override and record session effort from
+`/effort status` when available.
+
+Inspect `/tasks` for observed child model and effort; inherited effort may not
+be displayed. Keep session configuration distinct from independently observed
+child resolution.
 
 ## Worker types and context
 
