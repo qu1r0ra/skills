@@ -9,10 +9,11 @@ Use this wrapper for an AIOS coding retrospective or a retro cadence. It
 reviews configured local Codex and Claude sessions within the schedule-derived
 window. The workflow ranks friction signals, serves selected flagged excerpts
 after local secret masking, and records concise candidate outcomes. It does
-not promise a complete read of every session. For coding retros in other
-repositories, follow upstream [`retro`](../retro/SKILL.md) directly. For an
-explicitly bounded review of supplied sessions, use upstream `retro` directly,
-including in an AIOS checkout.
+not promise a complete read of every session. The digest may include a small
+unflagged sample as sanitized metadata only; only flagged excerpts are served
+to the model. For coding retros in other repositories, follow upstream
+[`retro`](../retro/SKILL.md) directly. For an explicitly bounded review of
+supplied sessions, use upstream `retro` directly, including in an AIOS checkout.
 
 At the active AIOS checkout root, read `governance/privacy-policy.yaml` before
 handling session evidence. Follow the four-command API and its completion
