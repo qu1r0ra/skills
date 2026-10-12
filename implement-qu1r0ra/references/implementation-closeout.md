@@ -25,12 +25,14 @@ live issue comment. Recording success alone does not require an amendment.
 Completion: all identities resolve to the intended repository, ticket, branch,
 worktree, and delivery mode.
 
-Whole-spec remote-backed runs default to the wrapper's ready-for-user-review
-handoff. Enter landing only after that acceptance gate is satisfied or the
-user explicitly authorizes autonomous landing. Record a staging integration
+AIOS remote-backed runs continue through landing under the target checkout's
+standing repository-delivery authorization. Do not request another approval
+for standard issue, branch, pull-request, or merge steps. Required human
+reviews, other human gates, and acceptance criteria remain in force; preserve
+an explicitly requested handoff-only stop. Record a staging integration
 branch separately from the destination branch; integrated worker retirement
-does not retire the delivery checkout or close its tickets. Direct execution
-keeps this procedure's autonomous closeout within existing authorization.
+does not retire the delivery checkout or close its tickets. For other
+repositories, follow their delivery contract and authorization.
 
 ## Preflight
 
@@ -102,10 +104,10 @@ or a named publication or human gate remains and the feature state is preserved.
    retrying one failed push from the same verified state.
 2. Inspect required checks, required approvals, branch protection, and the
    current pull-request state. Wait for automated checks when they are pending.
-3. Merge the pull request when all required automated gates pass and no human
-   approval or live authorization is required. Use the repository/platform
-   merge policy; do not bypass branch protection or invent an administrative
-   override.
+3. Merge the pull request when all required automated gates pass and all
+   required human approvals are present. Use the repository/platform merge
+   policy and its applicable authorization; do not bypass branch protection
+   or invent an administrative override.
 4. Verify that the pull request is actually merged and record its merge SHA.
 
 Completion: the platform reports the pull request merged, or a named human or
