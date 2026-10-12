@@ -42,11 +42,14 @@ both axes account for the committed delivery unit, repairs, rounds, and gates.
 
 ## Delivery
 
-Remote-backed whole-spec runs default to a verified PR ready for user review.
-Retain the delivery branch/worktree and keep issues open until acceptance.
-Explicitly authorized autonomous landing, direct runs, and accepted local-only
-delivery use [implementation closeout](references/implementation-closeout.md).
-Preserve a requested handoff-only stop and the repository's human gates.
+For AIOS, remote-backed whole-spec and direct runs complete the verified PR
+workflow under the standing repository-delivery authorization in the target
+checkout's root `AGENTS.md`; do not ask again for standard issue, branch, PR,
+or merge steps. Merge only after required checks pass and every required human
+review or other human gate is satisfied. Follow the target repository's rules
+outside AIOS. Use [implementation closeout](references/implementation-closeout.md)
+for landing and cleanup. Preserve a requested handoff-only stop and local-only
+delivery route.
 
 For an AIOS ticket under a `[Spec]` issue, apply the target repository's
 parent-spec closeout rule after accepted child delivery; a worker merge is not
