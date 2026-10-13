@@ -19,7 +19,9 @@ authorization boundary. Follow `tdd` at approved seams; obtain a missing seam
 decision before test-first implementation. Do not re-open settled test seams
 merely because the worker did not attend planning.
 
-Use actual isolated workers and one integration writer at a time. Preserve
+Run at most five implementer workers at once, taking the frontier in
+dependency-map order; the user can raise or lower the cap. Use actual isolated
+workers and one integration writer at a time. Preserve
 unrelated state when checking worker bases: create or rebase a clean scoped
 checkout instead of treating upstream's reset instruction as overwrite
 permission. Workers implement, test, commit, and reconcile with the current
