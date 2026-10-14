@@ -10,8 +10,8 @@ The child model resolves in this order: the Agent call's `model`, the subagent
 definition's `model`, `CLAUDE_CODE_SUBAGENT_MODEL`, then the session
 model. Record which source set the routed model.
 
-The Agent call's `model` takes an alias (`haiku`, `sonnet`, `opus`, `fable`),
-never a full ID. Pass the alias for the routed ID: `claude-haiku-5-5` is
+The Agent call's `model` takes an alias (`haiku`, `sonnet`, `opus`, `fable`).
+Pass the alias for the routed full ID: `claude-haiku-5-5` is
 `haiku`, `claude-sonnet-5-5` is `sonnet`, `claude-opus-5-5` is `opus`. The
 alias resolves to the current model of its family, so a child's self-reported
 ID is unverified; record it as such. When the alias cannot reach the routed
