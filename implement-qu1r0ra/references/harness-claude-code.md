@@ -10,23 +10,24 @@ The child model resolves in this order: the Agent call's `model`, the subagent
 definition's `model`, `CLAUDE_CODE_SUBAGENT_MODEL`, then the session
 model. Record which source set the routed model.
 
-Pass the routed full model ID in the call when its schema accepts one. When the
-call accepts only aliases, select a subagent definition whose `model` is the
-full ID; use an alias only when its mapping to the routed ID is established.
-With neither, the lane is blocked. An organization model restriction that
-substitutes a fallback model also blocks the lane.
+The Agent call's `model` takes an alias (`haiku`, `sonnet`, `opus`, `fable`).
+Pass the alias for the routed full ID: `claude-haiku-5-5` is
+`haiku`, `claude-sonnet-5-5` is `sonnet`, `claude-opus-5-5` is `opus`. The
+alias resolves to the current model of its family, so a child's self-reported
+ID is unverified; record it as such. When the alias cannot reach the routed
+ID, select a subagent definition whose `model` is the full ID, else the lane is
+blocked. An organization model restriction that substitutes a fallback model
+also blocks the lane.
 
-For explicit effort, pass the routed `effort` parameter to a non-fork Agent
-call (Claude Code v2.1.292+), or select a subagent definition with that
-`effort` field. Check `CLAUDE_CODE_EFFORT_LEVEL`: it takes precedence over both
+Pass the routed `effort` (`low` through `max`) on every non-fork Agent call
+(Claude Code v2.1.292+), or select a subagent definition with that `effort`
+field. Check `CLAUDE_CODE_EFFORT_LEVEL`: it takes precedence over both
 controls, and a conflicting value blocks the lane. When the build predates
 v2.1.292 and no definition carries the routed effort, the lane is blocked.
-For inherited effort, omit the child override and record session effort from
-`/effort status` when available.
+The routed-dispatch ledger binds the call's `effort` to the route.
 
-Inspect `/tasks` (v2.1.242+) for observed child model and effort; inherited
-effort may not be displayed. Keep session configuration distinct from
-independently observed child resolution.
+Inspect `/tasks` (v2.1.242+) for observed child model and effort. Keep session configuration distinct
+from independently observed child resolution.
 
 ## Worker types and context
 
