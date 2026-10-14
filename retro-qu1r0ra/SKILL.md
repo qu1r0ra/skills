@@ -15,6 +15,11 @@ to the model. For coding retros in other repositories, follow upstream
 [`retro`](../retro/SKILL.md) directly. For an explicitly bounded review of
 supplied sessions, use upstream `retro` directly, including in an AIOS checkout.
 
+Confirm the scope before running `retro run`. When the invocation names the
+current session, a specific session, or a bounded range, use upstream `retro`
+directly. When it names the cadence or schedule, run this workflow. When it
+names neither, ask which one the user wants.
+
 At the active AIOS checkout root, read `governance/privacy-policy.yaml` before
 handling session evidence. Follow the four-command API and its completion
 gates in `docs/operations/coding-retro.md`, and route AIOS domain questions
