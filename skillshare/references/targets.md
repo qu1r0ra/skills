@@ -14,11 +14,15 @@ skillshare target remove myapp                # Remove target (safe)
 ```
 
 Another account (`agent` + `config_dir` in config.yaml): `--agent` accepts `claude`
-(`CLAUDE_CONFIG_DIR`), `codex` (`CODEX_HOME`) and `pi` (`PI_CODING_AGENT_DIR`). The skills
-path follows the directory (`<config_dir>/skills` for Codex and Pi, even though Codex also
+(`CLAUDE_CONFIG_DIR`), `codex` (`CODEX_HOME`), `pi` and `omp` (both use
+`PI_CODING_AGENT_DIR`). The skills path follows the directory (`<config_dir>/skills`
+for Codex, Pi and OMP, even though Codex also
 reads the shared `~/.agents/skills`); only Claude has an agents directory. Any number of
 accounts can be added, and the target name is also valid in `mcp.targets` and a server's
-`targets`.
+`targets`. Optional `--cli <executable>` (`cli:` in config.yaml) runs the account's plugin
+commands with a compatible CLI, such as `omo` for Pi: a name on PATH or an absolute path, no
+arguments, shell aliases not seen. It affects plugins only. OMP accounts support
+skills, instructions, files, MCP and native code hooks; plugin sync is not supported.
 
 Instruction file of a custom target (`instructions` in config.yaml; `target add` has no
 flag for it, the dashboard sets it in the Custom target dialog or the target's file tab):
@@ -31,6 +35,28 @@ targets:
       path: ~/.myapp/AGENTS.md   # global: absolute or ~/; project: relative to the root
       import: true               # the tool follows @path lines
 ```
+
+Other files a tool reads (`files` in config.yaml, dashboard only): each entry is relative
+to the tool's folder (`~/.pi/agent` for pi; `.pi` in a project) and gets its own tab.
+Pi and oh-my-pi already get `APPEND_SYSTEM.md`. Removing an entry never deletes the file.
+
+```yaml
+targets:
+  pi:
+    files: [SYSTEM.md, prompts/review.md]
+```
+
+## DeepSeek Harness and GitLab Duo
+
+Built-in skills targets: `deepseek-harness` uses `~/.dsh/skills` globally and
+`.dsh/skills` in projects; `gitlab-duo` uses `~/.gitlab/duo/skills` globally and
+`skills` in projects. Windows Duo defaults to `%APPDATA%\GitLab\duo\skills`.
+Run skillshare with the same `DSH_HOME`, `GLAB_CONFIG_DIR`, or `XDG_CONFIG_HOME`
+overrides as the tool; an explicit skills path stays pinned. Other native overrides,
+including `DSH_AGENTS_HOME`, require an explicit target path.
+Duo must enable experimental global discovery with
+`glab duo cli --enable-global-skills true` or `GITLAB_ENABLE_GLOBAL_SKILLS=true`.
+Both tools also read the default shared `~/.agents/skills` directory.
 
 ## Skills Off
 
@@ -51,7 +77,7 @@ a folder an enabled target also writes to is left alone. `sync`/`diff`/`status`/
 skip the target's skills. `--skills` cannot be combined with include/exclude flags in one
 command. Works with `-p`.
 
-When `sync` warns that two targets "sync skills to <folder> with different filters, so each
+When `sync` warns that two targets "sync skills to <folder> with different settings, so each
 sync undoes the other", run the `skillshare target <name> --skills=false` it prints.
 
 ## Project Targets (`-p`)
@@ -168,7 +194,7 @@ Global and project modes use the **same short names** (e.g., `claude`, `cursor`,
 
 ## Safety
 
-**Always use** `target remove` to unlink targets.
+Unlink targets with `target remove`: it removes the link itself and leaves the linked destination alone.
 
 Inspect whether a path is a symlink before filesystem operations. Removing a symlink
 itself and traversing its target are different operations; `target remove` handles the
