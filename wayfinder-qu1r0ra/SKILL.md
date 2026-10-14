@@ -28,6 +28,10 @@ Read **Wayfinding operations** in the
 That contract owns headings, labels, sub-issues, native blocker links, and
 fallbacks; use it without duplicating the representation here.
 
+The contract's routing labels (`type:*`, domain, target, and `ready-for-*`)
+ride beside `wayfinder:*` on AIOS maps and children. This replaces upstream's
+rule that `wayfinder:` labels are the only labels a map and its tickets carry.
+
 Follow **Shaped issue publication** for new maps and children. Verify every
 authorized tracker write through its live validation route. Keep upstream's
 claim-before-work and resolution sequence, including the decision comment and
