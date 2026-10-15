@@ -1,12 +1,12 @@
 ---
 name: follow-writing-guide
-description: Draft or revise a text under a researched writing guide. Invoke by name with a guide path, entry id, or project name.
+description: Draft or revise work under a researched guide for writing and presenting. Invoke by name with a guide path, entry id, or project name.
 disable-model-invocation: true
 ---
 
 # Follow writing guide
 
-Draft or revise text under an existing guide. The guide owns the rules; this skill holds only the procedure. Invoking it is the explicit Humanizer request, and the guide's Humanizer section sets whether it runs.
+Draft or revise work for writing and presenting under an existing guide. The guide owns the rules; this skill holds only the procedure. Invoking it is the explicit Humanizer request, and the guide's Humanizer section sets whether it runs.
 
 ## Steps
 
@@ -35,7 +35,7 @@ Done when the warning is sent, or neither condition holds.
 
 ### 3. Draft or revise
 
-Write under the guide's rules, with its precedence order settling conflicts. Run Humanizer (`agent-skills/skills/humanizer/SKILL.md`) as the guide's Humanizer section directs, with its collision list and protections.
+Apply the guide's rules to the requested text, slides, or talk, with its precedence order settling conflicts. Run Humanizer (`agent-skills/skills/humanizer/SKILL.md`) as the guide's Humanizer section directs, with its collision list and protections.
 
 Done when every rule in the guide is applied or reported as a deviation under step 4.
 

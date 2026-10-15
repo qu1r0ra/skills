@@ -1,12 +1,12 @@
 ---
 name: curate-writing-guide
-description: Research a writing use case into a graded bank entry plus a self-contained project guide, or revise both. Invoke by name.
+description: Research a use case for writing and presenting into a graded bank entry plus a self-contained project guide, or revise both. Invoke by name.
 disable-model-invocation: true
 ---
 
 # Curate writing guide
 
-Turn one writing use case into a researched, source-graded entry in the `writing` wiki and a self-contained guide in the project. Read `qu1r0raOS-wikis/writing/AGENTS.md` and `governance/knowledge-profiles/writing-v1.md` first; the profile owns the source-record fields and the grades.
+Turn one use case for writing and presenting into a researched, source-graded entry in the `writing` wiki and a self-contained guide in the project. Read `qu1r0raOS-wikis/writing/AGENTS.md` and `governance/knowledge-profiles/writing-v1.md` first; the profile owns the source-record fields and the grades.
 
 A guide is stale when any of its sources is past `recheck_by`. To keep a guide current, take [Revise](#revise) instead of the steps below.
 
@@ -14,7 +14,7 @@ A guide is stale when any of its sources is past `recheck_by`. To keep a guide c
 
 ### 1. Frame
 
-Ask the author only what they alone know: the use case, the audience, the purpose, the constraints, and the quality bar (the author's own measure of good writing here, and which readers it serves). Recommend a value for anything they leave flexible, including a venue. A use case with no venue is valid; leave the venue key empty.
+Ask the author only what they alone know: the use case, the audience, the purpose, the constraints, and the quality bar (the author's own measure of quality here, and which readers or listeners it serves). Recommend a value for anything they leave flexible, including a venue. A use case with no venue is valid; leave the venue key empty.
 
 Done when the use-case summary names use case, audience, purpose, constraints, quality bar, and venue (or "none"), and the author has confirmed it.
 

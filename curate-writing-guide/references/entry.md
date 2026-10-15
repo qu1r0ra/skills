@@ -1,6 +1,6 @@
 # Bank entry
 
-The entry is one `guides/<slug>.md` concept under the `writing-v1` profile (`governance/knowledge-profiles/writing-v1.md` owns the source fields). The slug is lowercase kebab-case, from genre and venue or field.
+The entry is one `guides/<slug>.md` concept under the `writing-v1` profile (`governance/knowledge-profiles/writing-v1.md` owns the source fields). The slug is lowercase kebab-case, from genre and venue or field; writing and presenting are both valid use cases.
 
 ## Frontmatter
 
@@ -9,7 +9,7 @@ The entry is one `guides/<slug>.md` concept under the `writing-v1` profile (`gov
 type: guide
 title: <Use case title>
 description: <One sentence: use case, audience, venue>
-tags: [writing, <genre>, <field>]
+tags: [<writing or presenting>, <genre>, <field>]
 status: draft
 trust: reviewed
 sources:
