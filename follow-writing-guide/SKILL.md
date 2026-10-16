@@ -1,5 +1,6 @@
 ---
 name: follow-writing-guide
+disable-model-invocation: true
 description: Draft or revise work under a researched guide for writing and presenting. Invoke by name with a guide path, entry id, or project name.
 ---
 
