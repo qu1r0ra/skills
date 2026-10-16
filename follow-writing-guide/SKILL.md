@@ -1,12 +1,12 @@
 ---
 name: follow-writing-guide
-description: Draft or revise a text under a researched writing guide. Invoke by name with a guide path, entry id, or project name.
 disable-model-invocation: true
+description: Draft or revise work under a researched guide for writing and presenting. Invoke by name with a guide path, entry id, or project name.
 ---
 
 # Follow writing guide
 
-Draft or revise text under an existing guide. The guide owns the rules; this skill holds only the procedure. Invoking it is the explicit Humanizer request, and the guide's Humanizer section sets whether it runs.
+Draft or revise work for writing and presenting under an existing guide. The guide owns the rules; this skill holds only the procedure. Invoking it is the explicit Humanizer request, and the guide's Humanizer section sets whether it runs.
 
 ## Steps
 
@@ -18,9 +18,14 @@ Take the guide from the argument, in this order:
 2. A wiki entry id: `qu1r0raOS-wikis/writing/guides/<id>.md`.
 3. A project name: look it up in `qu1r0raOS-wikis/writing/usage/projects.md`, which gives the guide's repo-relative path.
 
-Read the guide in full. Stop with a message naming what was tried when none resolves.
+Read the guide's opening and look for a `Read by task` router. When present,
+read its common sections and the branch for the requested text, slides, or
+talk; follow conditional references only when their trigger applies. Read the
+full guide when it has no task router. Stop with a message naming what was
+tried when none resolves.
 
-Done when one guide is read, or the stop message is sent.
+Done when the guide's common sections and applicable task branch are read,
+or its full text is read when no router exists, or the stop message is sent.
 
 ### 2. Check currency
 
@@ -35,9 +40,9 @@ Done when the warning is sent, or neither condition holds.
 
 ### 3. Draft or revise
 
-Write under the guide's rules, with its precedence order settling conflicts. Run Humanizer (`agent-skills/skills/humanizer/SKILL.md`) as the guide's Humanizer section directs, with its collision list and protections.
+Apply the guide's rules to the requested text, slides, or talk, with its precedence order settling conflicts. Run Humanizer (`agent-skills/skills/humanizer/SKILL.md`) as the guide's Humanizer section directs, with its collision list and protections.
 
-Done when every rule in the guide is applied or reported as a deviation under step 4.
+Done when every applicable guide rule is applied or reported as a deviation under step 4.
 
 ### 4. Report deviations
 
