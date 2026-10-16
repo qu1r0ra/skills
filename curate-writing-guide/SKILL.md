@@ -1,7 +1,6 @@
 ---
 name: curate-writing-guide
 description: Research a use case for writing and presenting into a graded bank entry plus a self-contained project guide, or revise both. Invoke by name.
-disable-model-invocation: true
 ---
 
 # Curate writing guide
