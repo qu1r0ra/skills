@@ -20,10 +20,10 @@ Done when the use-case summary names use case, audience, purpose, constraints, q
 
 ### 2. Research
 
-Run read-only leaf subagents in two rounds. Read `docs/agents/model-routing.md` and use the worker pair pinned for this harness; a lane without an available pair is blocked. Briefs, the lane size limit, and the shared rules are in [lanes.md](references/lanes.md). Give each lane its brief and the use-case summary only: no draft text, no private exemplars.
+Invoke [research-qu1r0ra](../research-qu1r0ra/SKILL.md) in composed mode for worker dispatch and evidence reporting. This skill owns the four briefs, source restrictions, grading, and the two-round policy below; [lanes.md](references/lanes.md) supplies those caller inputs. Give each lane its brief and the confirmed use-case summary only: no draft text, no private exemplars. An unavailable required worker pair blocks its lane.
 
-1. **Sweep:** dispatch the four broad lanes in one turn: Requirements, Conventions, Craft, Exemplars. Split a lane by topic first when its brief exceeds the size limit.
-2. **Gap-fill:** when the sweep returns, group its gaps by topic and dispatch one narrow lane per group in one turn. Run this round once.
+1. **Sweep:** schedule the four broad lanes in one round: Requirements, Conventions, Craft, Exemplars. Queue lanes beyond available concurrency. Split a lane by topic first when its brief exceeds the size limit.
+2. **Gap-fill:** when the sweep returns, group its gaps by topic and schedule one narrow lane per group in one round. Run this round once.
 
 Done when every gap is answered or sits under Open questions, and each lane has returned findings that meet its evidence standard, or has listed its searches and named results (a lane that finds nothing) or its block. Any blocked lane marks coverage `partial`, reported to the author.
 
