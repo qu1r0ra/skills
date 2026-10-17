@@ -46,12 +46,9 @@ workers return committed changes for integration before required re-review.
 Parent verification and review obligations apply to the final integrated
 candidate, rather than multiplying a full delivery workflow per worker.
 
-For AIOS remote-backed work, continue through the verified landing workflow
-under the target checkout's standing repository-delivery authorization. Merge
-only after required checks pass and no required human review or other human
-gate remains. Preserve an explicitly requested handoff-only stop. For other
-repositories, follow their delivery authorization and contract. Local-only
-work follows its handoff contract.
+Deliver through the target repository's implementation contract (for AIOS,
+`docs/agents/implementation-contract.md` and its dispatch and lifecycle
+references). Local-only work follows its handoff contract.
 This narrows upstream's resolve-ticket completion to the owning tracker’s
 accepted-delivery rule.
 
