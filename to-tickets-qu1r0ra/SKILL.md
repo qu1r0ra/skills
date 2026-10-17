@@ -13,6 +13,8 @@ Follow the [upstream `to-tickets` skill](../to-tickets/SKILL.md) as the authorit
 - Split for a genuine blocking prerequisite, an independently releasable outcome, or a seam whose parallel benefit outweighs its coordination cost (worker cold start, worktree, merge, published issue). Fold a ticket too small to earn that cost, such as rename-only, docs-only, or test-only work, into its nearest neighbor. The ticket count follows from the seams.
 - When the user asks for the direct route or a coarse breakdown, prefer the fewest cohesive tickets instead.
 - This replaces upstream's single-context-window sizing rule: agents can compact and continue.
+- Name tests only for new behaviour that could regress silently, at an existing seam. A docs, config, or guidance ticket's verification line is `Tests: none` plus the existing checks that observe it.
+- Give each one-off ticket (migration, import, backfill) a removal criterion: its code and tests are deleted once the owner confirms the run is complete.
 
 ## Dependency map
 
