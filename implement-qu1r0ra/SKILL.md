@@ -21,6 +21,11 @@ so do not require a second user-only skill invocation.
   [`implement`](../implement/SKILL.md). Keep direct execution and its testing
   workflow. The user may request this route even for an entire spec.
 
+TDD override: apply `tdd` only where the target contract's test-demand rule
+calls for a test (AIOS: right-size test demand in
+`docs/agents/implementation-contract.md`). Verify other criteria with the
+cheapest sufficient check.
+
 Identify the target Git root and follow its implementation and tracker
 contracts. For AIOS, read the target checkout's
 `docs/agents/implementation-contract.md`; it owns isolation, ownership,
