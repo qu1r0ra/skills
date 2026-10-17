@@ -17,7 +17,7 @@ the implementation has an associated ticket.
 The implementation worktree must be clean, registered, and on the exact issue
 branch. Follow the repository's receipt contract when defined. Without one,
 finalize committed candidate notes before final verification: scoped checks,
-full-suite command or exception, review-round/pair count, repair history, and
+full-suite command or exception, review outcome, repair history, and
 remaining gates. Record final revision and process evidence in the check
 artifact; later delivery and cleanup outcomes belong in a runtime receipt and
 live issue comment. Recording success alone does not require an amendment.
@@ -141,7 +141,7 @@ deleted branch is identified in the receipt.
 ## Update and close tickets
 
 Update the primary implementation ticket (and, for a batch, every other ticket in it) with the implementation commits,
-landing or pull-request SHA, verification evidence, review-round/pair count,
+landing or pull-request SHA, verification evidence, review outcome,
 repair/re-review history, publication result, cleanup result, and remaining
 gates. Update directly
 affected blockers or dependents only when their state changed.

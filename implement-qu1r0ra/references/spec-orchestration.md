@@ -41,7 +41,7 @@ failed integration or invalidated check blocks the affected frontier again.
 This replaces using early tracker closure to drive upstream's frontier.
 
 Use upstream's integrated Standards and Spec PR review with
-`review-policy.md`; its round budget covers the entire delivery unit. Repair
+`review-policy.md`; its single re-review covers the entire delivery unit. Repair
 workers return committed changes for integration before required re-review.
 Parent verification and review obligations apply to the final integrated
 candidate, rather than multiplying a full delivery workflow per worker.

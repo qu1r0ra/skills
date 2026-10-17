@@ -38,12 +38,13 @@ ignored shared skill sources through the supervising primary checkout.
 Commit the complete delivery unit before upstream's `code-review` step. Review
 the fixed recorded delivery base to committed HEAD, so the diff contains the
 implementation. Commit repairs before re-review. Whole-spec mode reviews the
-integrated branch once, followed only by necessary repair review; worker
+integrated branch once, followed only by the single permitted re-review; worker
 completion does not add a separate per-ticket PR review loop.
 
-Read [review-policy.md](references/review-policy.md) for harness dispatch,
-role routing, the global round budget, and the review receipt. Completion:
-both axes account for the committed delivery unit, repairs, rounds, and gates.
+Read [review-policy.md](references/review-policy.md) for when to review, the
+Standards and Spec passes, and the review receipt. Completion: both axes
+account for the committed delivery unit, repairs, and gates, or the change is
+docs-only or maintenance and skips review.
 
 ## Delivery
 
@@ -61,6 +62,6 @@ parent-spec closeout rule after accepted child delivery; a worker merge is not
 child acceptance.
 
 Report the selected route, candidate commits, per-ticket acceptance evidence,
-review rounds, checks, PR or local handoff, retained/retired Git state, verified
+review outcome, checks, PR or local handoff, retained/retired Git state, verified
 ticket states, and remaining gates. Completion distinguishes implemented and
 ready-for-review from accepted, landed, and closed.
