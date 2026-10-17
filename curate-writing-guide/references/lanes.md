@@ -1,14 +1,12 @@
 # Research lanes
 
-Read-only leaf subagents, in two rounds: a sweep of four broad lanes, then one gap-fill round of narrow lanes. Every brief carries the use-case summary, this lane's section, and the shared rules.
+Caller policy for [research-qu1r0ra](../../research-qu1r0ra/SKILL.md): a sweep of four broad lanes, then one gap-fill round of narrow lanes. Every brief carries the use-case summary, this lane's section, and the restrictions below. The wrapper owns the common read-only worker and evidence-report contract.
 
 ## Shared rules
 
 - Use public sources only.
-- Fetch raw text with `curl` and copy each quote from it: WebFetch returns a summary, and a summary is not a quote. Reach apastyle.apa.org through `https://web.archive.org/web/2026/<url>`, which passes its bot wall.
-- Return each finding as: the rule, its source URL, provider, title, a passage, the date fetched, and a tag. `verified` means the passage was copied from raw text you read; `unverified` means a snippet, a summary, or a page you could not open.
-- End the report with **Gaps**: each question you could not answer, or answered only `unverified`.
-- A lane that finds nothing lists every search it ran and every result it named.
+- Fetch public raw text with `curl`; use the wrapper's verification tags. Reach apastyle.apa.org through `https://web.archive.org/web/2026/<url>` when its live page has a bot wall.
+- Include questions answered only `unverified` under **Gaps**, along with unanswered questions.
 - Keep the report under 1,500 words.
 
 ## Lane size
