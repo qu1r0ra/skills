@@ -25,22 +25,19 @@ live issue comment. Recording success alone does not require an amendment.
 Completion: all identities resolve to the intended repository, ticket, branch,
 worktree, and delivery mode.
 
-AIOS remote-backed runs continue through landing under the target checkout's
-standing repository-delivery authorization. Do not request another approval
-for standard issue, branch, pull-request, or merge steps. Required human
-reviews, other human gates, and acceptance criteria remain in force; preserve
-an explicitly requested handoff-only stop. Record a staging integration
-branch separately from the destination branch; integrated worker retirement
-does not retire the delivery checkout or close its tickets. For other
-repositories, follow their delivery contract and authorization.
+AIOS runs follow the target checkout's implementation contract, which owns
+the standing delivery authorization, the standard and light routes, and the
+lifecycle. Preserve an explicitly requested handoff-only stop. Record a
+staging integration branch separately from the destination branch; integrated
+worker retirement does not retire the delivery checkout or close its tickets.
+For other repositories, follow their delivery contract and authorization.
 
 ## Preflight
 
 1. Inspect the supervising checkout's branch, status, worktrees, remotes, and
    implementation diff.
-   For AIOS, use `implementation-preflight --closeout` as documented in the
-   implementation contract. Refresh remote refs separately before landing
-   and select only authorized targets.
+   For AIOS, use the inventory in the contract's lifecycle reference. Refresh
+   remote refs separately before landing.
 2. Preserve unrelated changes in the supervising checkout. Compare changed
    paths and the implementation diff; proceed only when the dirty paths are
    disjoint from the implementation landing. Stop before merge when they
@@ -74,27 +71,12 @@ recorded as unavailable.
 
 ## AIOS pull-request landing
 
-For AIOS control-plane implementation, follow the repository's
-`docs/agents/implementation-contract.md` and use its pull-request path. Create
-the implementation worktree directly beneath the supervising checkout's
-`.worktrees/` directory; preflight and retirement enforce this managed
-location.
-
-1. Push the verified feature branch and open a pull request to `main`. Preserve
-   the branch if publication fails; never force-push or bypass a repository
-   rule.
-2. Run focused local checks while iterating. The final pull-request candidate
-   must pass the required `just check` Actions run. Verify the active `main`
-   rules, exact PR head and base, and successful run with
-   `implementation-preflight --for-landing`. The ruleset does not require an
-   up-to-date base, so main advancing alone never re-runs CI. A
-   changed head or non-clean merge state blocks readiness until current passing
-   evidence is available. Run `gh pr merge --squash --delete-branch` from the
-   primary checkout; the contract's landing section owns the details.
-3. Merge only after required automated gates pass and no human gate remains.
-   Verify the PR is merged, its tested head and base plus Actions run identity
-   are recorded, and its merge SHA is an ancestor of `origin/main`. The
-   post-landing check reuses this PR evidence; it does not rerun the full suite.
+Follow the contract's deliver step (`docs/agents/implementation-contract.md`)
+and its lifecycle reference: push the feature branch, open the pull request
+to `main`, land through `implementation-preflight --for-landing` and
+`gh pr merge --squash --delete-branch` from the primary checkout, and record the
+merged PR, required CI run, and merge SHA ancestry. Preserve the branch if
+publication fails; never force-push or bypass a repository rule.
 
 Completion: the merged PR, required CI run, and merge SHA ancestry are verified,
 or a named publication or human gate remains and the feature state is preserved.
@@ -123,12 +105,7 @@ technical gate remains and the feature state is preserved.
 2. Delete the corresponding local feature branch only after verifying the
    delivery receipt's exact feature head and merged PR lineage. For AIOS
    squash or rebase delivery, follow the [local branch-retirement
-   procedure](../../../../docs/operations/worktree-retirement.md#local-branch-retirement):
-   verify the tested PR head and base, required checks, merge SHA on the
-   trusted base, and the branch tip's lineage to that tested head before using
-   `git branch -D`. Git ancestry alone does not establish that squash-delivered
-   work is unmerged. Remote feature-branch retirement remains governed by its
-   separate existing rule below.
+   procedure](../../../../docs/operations/worktree-retirement.md#local-branch-retirement).
    Delete the remote feature branch after a verified pull-request merge when
    the platform permits it.
 3. Preserve the merge SHA and implementation receipt even after branch removal.
@@ -156,7 +133,7 @@ Completion: the ticket's live state accurately reflects landed, published,
 accepted, and remaining-gate status.
 
 For an AIOS ticket under a `[Spec]` issue, follow the
-[parent-spec closeout rule](../../../../docs/agents/implementation-contract.md#parent-specification-closeout)
+[parent-spec closeout rule](../../../../docs/agents/implementation-lifecycle.md#parent-specification-closeout)
 after updating the ticket or batch.
 
 ## Failure states

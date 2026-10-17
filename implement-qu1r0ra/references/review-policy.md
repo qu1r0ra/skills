@@ -16,7 +16,8 @@ Every other change gets the review below.
 ## Review passes
 
 Request one Standards report and one Spec report through the harness's normal
-subagent mechanism. Give each reviewer the fixed base-to-HEAD comparison, the
+subagent mechanism. Implementation workers do not review their own delivery
+unit. Give each reviewer the fixed base-to-HEAD comparison, the
 sources for its axis, and the parent's check results. The parent owns candidate
 changes and delivery. An unavailable worker mechanism leaves that review lane
 unavailable, with the reason recorded.
