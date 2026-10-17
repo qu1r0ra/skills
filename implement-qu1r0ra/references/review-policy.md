@@ -8,6 +8,10 @@ Before review, read AIOS `docs/agents/model-routing.md` from the active AIOS
 checkout, or its supervising primary checkout when working elsewhere. Follow
 its preferences, matching harness adapter, and dispatch evidence policy.
 
+Deletion-only and documentation-only tickets need no review. A behaviour
+ticket gets one Standards and Spec pair, routed per the model-routing policy;
+this skill names no model.
+
 ### Review policy for the upstream `/code-review` step
 
 Request separate Standards and Spec reports through the harness's normal

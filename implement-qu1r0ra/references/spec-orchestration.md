@@ -27,6 +27,10 @@ checkout instead of treating upstream's reset instruction as overwrite
 permission. Workers implement, test, commit, and reconcile with the current
 integration tip; the run owner verifies their evidence and owns delivery.
 
+Put these in every worker brief: commit early and often; run
+`just format-changed` before each commit; park in-progress work as a temporary
+WIP commit, never a bare `git stash`.
+
 ## Progress and review
 
 Within the active task graph, treat a prerequisite as satisfied only after its

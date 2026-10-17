@@ -29,6 +29,11 @@ The routed-dispatch ledger binds the call's `effort` to the route.
 Inspect `/tasks` (v2.1.242+) for observed child model and effort. Keep session configuration distinct
 from independently observed child resolution.
 
+## Launch records
+
+Record each launch with `routed-dispatch record-launch` before preparing the
+next attempt; `prepare` blocks while an attempt is unresolved.
+
 ## Worker types and context
 
 Use `general-purpose` for writing workers and for Standards and Spec reviewers,

@@ -86,10 +86,11 @@ location.
 2. Run focused local checks while iterating. The final pull-request candidate
    must pass the required `just check` Actions run. Verify the active `main`
    rules, exact PR head and base, and successful run with
-   `implementation-preflight --for-landing`. The candidate must report a clean
-   merge state against the current base under the strict rules. A changed head,
-   stale base, or non-clean merge state blocks readiness until current passing
-   evidence is available.
+   `implementation-preflight --for-landing`. The ruleset does not require an
+   up-to-date base, so main advancing alone never re-runs CI. A
+   changed head or non-clean merge state blocks readiness until current passing
+   evidence is available. Run `gh pr merge --squash --delete-branch` from the
+   primary checkout; the contract's landing section owns the details.
 3. Merge only after required automated gates pass and no human gate remains.
    Verify the PR is merged, its tested head and base plus Actions run identity
    are recorded, and its merge SHA is an ancestor of `origin/main`. The
