@@ -2,7 +2,7 @@
 
 Before dispatch, read `docs/agents/model-routing.md` from the active AIOS
 checkout, or its supervising checkout when working elsewhere. It owns role
-preferences and dispatch evidence.
+preferences and the opt-in dispatch ledger.
 
 ## Native workers
 
@@ -18,7 +18,7 @@ against the target repository's isolation contract before edits.
 
 Use normal harness workers for separate Standards and Spec reports; provide
 the fixed comparison and parent check results. Follow
-[review-policy.md](review-policy.md) for review rounds and completion.
+[review-policy.md](review-policy.md) for the review passes and completion.
 
 ## Other surfaces
 

@@ -2,7 +2,7 @@
 
 Before dispatch, read `docs/agents/model-routing.md` from the active AIOS
 checkout, or its supervising checkout when working elsewhere. It owns role
-preferences and dispatch evidence.
+preferences and the opt-in dispatch ledger.
 
 ## Model and effort
 
@@ -24,15 +24,9 @@ Pass the routed `effort` (`low` through `max`) on every non-fork Agent call
 field. Check `CLAUDE_CODE_EFFORT_LEVEL`: it takes precedence over both
 controls, and a conflicting value blocks the lane. When the build predates
 v2.1.292 and no definition carries the routed effort, the lane is blocked.
-The routed-dispatch ledger binds the call's `effort` to the route.
 
 Inspect `/tasks` (v2.1.242+) for observed child model and effort. Keep session configuration distinct
 from independently observed child resolution.
-
-## Launch records
-
-Record each launch with `routed-dispatch record-launch` before preparing the
-next attempt; `prepare` blocks while an attempt is unresolved.
 
 ## Worker types and context
 

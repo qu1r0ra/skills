@@ -2,7 +2,7 @@
 
 Before dispatch, read `docs/agents/model-routing.md` from the active AIOS
 checkout, or its supervising checkout when working elsewhere. It owns role
-preferences and dispatch evidence; this adapter maps them to Codex controls.
+preferences and the opt-in dispatch ledger; this adapter maps them to Codex controls.
 
 ## Launch controls
 
@@ -22,7 +22,7 @@ acceptance, not independently resolved model or effort.
 
 Use the normal subagent mechanism for separate Standards and Spec reports.
 Give reviewers the fixed comparison, applicable sources, and parent check
-results. Follow [review-policy.md](review-policy.md) for review rounds and
+results. Follow [review-policy.md](review-policy.md) for the review passes and
 completion.
 
 For writing workers, provide the exact checkout and integration base required
