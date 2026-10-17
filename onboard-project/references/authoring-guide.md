@@ -132,8 +132,9 @@ not measured effects for this workflow.
 ### Empirical
 
 A. **Support depends on prior knowledge.** Spanjers et al. (2011) randomized
-   75 Dutch secondary students to segmented or continuous animated probability
-   examples. Segmentation improved learning efficiency for lower-prior-knowledge
+   76 Dutch secondary students to segmented or continuous animated probability
+   examples; one was excluded for missing data, leaving 75 in the analysis.
+   Segmentation improved learning efficiency for lower-prior-knowledge
    students, not higher-prior-knowledge students. Consider an introductory route
    with a way to skip familiar material; the study concerns one subject, age
    group, and medium, not professional project orientation.
