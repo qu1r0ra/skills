@@ -1,16 +1,16 @@
 # Whole-spec orchestration preferences
 
 Follow upstream `implement-spec` for its task graph, exploration, background
-implementers, merger workers, integration branch, draft PR, and final
+implementers, merger subagents, integration branch, draft PR, and final
 `code-review`. These are the personal exceptions and dispatch extensions.
 
 ## Before dispatch
 
 Read the target repository's implementation contract, tracker rules, and this
 wrapper's matching harness adapter. Read AIOS `docs/agents/model-routing.md`
-for every child role; adapters supply capability mechanics, not another model
-preference. Resolve an unavailable implementation or merger lane before work
-depending on it. Report it as blocked rather than silently substituting direct
+for every child role (merge and repair work use the Implementer row); adapters
+supply capability mechanics, not another model preference. Resolve an
+unavailable implementation lane before work depending on it. Report it as blocked rather than silently substituting direct
 execution. The user can explicitly select the direct route.
 
 Pass context pointers plus the ticket's approved scope, acceptance criteria,
@@ -42,7 +42,7 @@ This replaces using early tracker closure to drive upstream's frontier.
 
 Use upstream's integrated Standards and Spec PR review with
 `review-policy.md`; its single re-review covers the entire delivery unit. Repair
-workers return committed changes for integration before required re-review.
+implementers return committed changes for integration before required re-review.
 Parent verification and review obligations apply to the final integrated
 candidate, rather than multiplying a full delivery workflow per worker.
 
