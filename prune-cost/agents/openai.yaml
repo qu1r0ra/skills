@@ -1,4 +1,4 @@
 interface:
-  display_name: "Prune qu1r0ra"
+  display_name: "Prune cost"
   short_description: "Measure and cut slow CI, low-value tests, and idle gates"
-  default_prompt: "Use $prune-qu1r0ra to measure slow CI or tests and propose cost-driven cuts."
+  default_prompt: "Use $prune-cost to measure slow CI or tests and propose cost-driven cuts."

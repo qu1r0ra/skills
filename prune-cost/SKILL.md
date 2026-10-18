@@ -1,9 +1,9 @@
 ---
-name: prune-qu1r0ra
+name: prune-cost
 description: Prune what costs more than it returns. Triggers - a slow CI job or `just check`; a slow or low-value test; a gate that blocks without benefit; one-off code past its removal criterion.
 ---
 
-# Prune qu1r0ra
+# Prune cost
 
 Remove anything whose cost exceeds its benefit. Measure first, cut by stated criteria, keep a safety net, record before and after numbers.
 
