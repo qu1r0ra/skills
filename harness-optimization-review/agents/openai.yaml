@@ -1,0 +1,4 @@
+interface:
+  display_name: "Global harness optimization review"
+  short_description: "Review global Claude Code and Codex setup"
+  default_prompt: "Use $harness-optimization-review to review my authorized global Claude Code and Codex assets and save a sanitized repository receipt."
