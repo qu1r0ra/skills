@@ -75,11 +75,13 @@ Follow the contract's deliver step (`docs/agents/implementation-contract.md`)
 and its lifecycle reference: push the feature branch, open the pull request
 to `main`, land through `implementation-preflight --for-landing` and
 `gh pr merge --squash --delete-branch` from the primary checkout, and record the
-merged PR, required CI run, and merge SHA ancestry. Preserve the branch if
-publication fails; never force-push or bypass a repository rule.
+merged PR, GitGuardian result, local check receipt, and merge SHA ancestry.
+Preserve the branch if publication fails; never force-push or bypass a
+repository rule.
 
-Completion: the merged PR, required CI run, and merge SHA ancestry are verified,
-or a named publication or human gate remains and the feature state is preserved.
+Completion: the merged PR, GitGuardian result, local check receipt, and merge
+SHA ancestry are verified, or a named publication or human gate remains and the
+feature state is preserved.
 
 ## Other remote-backed landing
 
