@@ -11,10 +11,10 @@ wrapper's matching harness adapter. Read the AIOS
 [model-routing policy](../../../../docs/agents/model-routing.md) for every child
 role (merge and repair work use the Implementer row); adapters supply capability
 mechanics, not another model preference. Follow the
-[Provider selection rules](../../../../docs/agents/model-routing.md#provider-selection),
-including rule 2's non-review exhaustion exception and rule 3's required-review
-provider restriction. Follow [Dispatch rules](../../../../docs/agents/model-routing.md#dispatch)
-for the cap and blocked-lane handling.
+[Provider selection](../../../../docs/agents/model-routing.md#provider-selection)
+for provider defaults, exhaustion, and review routing. Follow
+[Dispatch](../../../../docs/agents/model-routing.md#dispatch) for the global
+child cap and blocked-lane handling.
 
 An explicit direct-ticket request selects upstream `implement` through this
 wrapper's [workflow selector](../SKILL.md#select-the-workflow) and retains its
@@ -68,10 +68,18 @@ accepted-delivery rule.
   managed worktrees, preflight, serialized integration, and PR evidence.
 - Retire integrated workers through the worker-retirement branch in
   `docs/operations/worktree-retirement.md`. Keep the integration worktree at the
-  user-review gate unless an approved autopilot run plan includes this ticket;
-  that plan replaces the user-review gate and is the go signal for the run.
-  Worker retirement preserves evidence and recovery branches; final cleanup
-  still requires accepted delivery.
+  user-review gate unless an approved autopilot run plan includes this ticket.
+  Store the plan as `.scratch/autopilot/<date>/revision-plan.md`; CJ approves it
+  in the run kickoff before dispatch. Keep each run's `brief.md` and `report.md`
+  under `.scratch/autopilot/<date>-runN/`; the brief is operational context,
+  not the approval artifact. The approved plan replaces the user-review gate
+  only for tickets it names. Worker retirement preserves evidence and recovery
+  branches; final cleanup still requires accepted delivery.
+- If a held lane or dispatchable frontier remains when the orchestrator's turn
+  ends, the monitor named in `.scratch/autopilot/<date>-runN/monitor-brief.md`
+  checks the thread and report hourly. It sends at most one resume message per
+  check when the thread is idle and work remains or the report has a held line;
+  T3 auto-resume is not a recovery guarantee.
 
 Completion: the full task graph is integrated and verified, the integrated
 review and selected delivery gate are satisfied or named, and worker, delivery,
