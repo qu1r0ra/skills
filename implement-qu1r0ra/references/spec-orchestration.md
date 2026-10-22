@@ -7,11 +7,18 @@ implementers, merger subagents, integration branch, draft PR, and final
 ## Before dispatch
 
 Read the target repository's implementation contract, tracker rules, and this
-wrapper's matching harness adapter. Read AIOS `docs/agents/model-routing.md`
-for every child role (merge and repair work use the Implementer row); adapters
-supply capability mechanics, not another model preference. Resolve an
-unavailable implementation lane before work depending on it. Report it as blocked rather than silently substituting direct
-execution. The user can explicitly select the direct route.
+wrapper's matching harness adapter. Read the AIOS
+[model-routing policy](../../../../docs/agents/model-routing.md) for every child
+role (merge and repair work use the Implementer row); adapters supply capability
+mechanics, not another model preference. Follow the
+[Provider selection](../../../../docs/agents/model-routing.md#provider-selection)
+for provider defaults, exhaustion, and review routing. Follow
+[Dispatch](../../../../docs/agents/model-routing.md#dispatch) for the global
+child cap and blocked-lane handling.
+
+An explicit direct-ticket request selects upstream `implement` through this
+wrapper's [workflow selector](../SKILL.md#select-the-workflow) and retains its
+[independent review policy](review-policy.md).
 
 Pass context pointers plus the ticket's approved scope, acceptance criteria,
 public test seams, current integration base, worker worktree/branch, and
@@ -19,9 +26,8 @@ authorization boundary. Follow `tdd` at approved seams; obtain a missing seam
 decision before test-first implementation. Do not re-open settled test seams
 merely because the worker did not attend planning.
 
-Run at most five implementer workers at once, taking the frontier in
-dependency-map order; the user can raise or lower the cap. Use actual isolated
-workers and one integration writer at a time. Preserve
+Take the frontier in dependency-map order. Use actual isolated workers and one
+integration writer at a time. Preserve
 unrelated state when checking worker bases: create or rebase a clean scoped
 checkout instead of treating upstream's reset instruction as overwrite
 permission. Workers implement, test, commit, and reconcile with the current
@@ -62,8 +68,18 @@ accepted-delivery rule.
   managed worktrees, preflight, serialized integration, and PR evidence.
 - Retire integrated workers through the worker-retirement branch in
   `docs/operations/worktree-retirement.md`. Keep the integration worktree at the
-  user-review gate. Worker retirement preserves evidence and recovery
+  user-review gate unless an approved autopilot run plan includes this ticket.
+  Store the plan as `.scratch/autopilot/<date>/revision-plan.md`; CJ approves it
+  in the run kickoff before dispatch. Keep each run's `brief.md` and `report.md`
+  under `.scratch/autopilot/<date>-runN/`; the brief is operational context,
+  not the approval artifact. The approved plan replaces the user-review gate
+  only for tickets it names. Worker retirement preserves evidence and recovery
   branches; final cleanup still requires accepted delivery.
+- If a held lane or dispatchable frontier remains when the orchestrator's turn
+  ends, the monitor named in `.scratch/autopilot/<date>-runN/monitor-brief.md`
+  checks the thread and report hourly. It sends at most one resume message per
+  check when the thread is idle and work remains or the report has a held line;
+  T3 auto-resume is not a recovery guarantee.
 
 Completion: the full task graph is integrated and verified, the integrated
 review and selected delivery gate are satisfied or named, and worker, delivery,
