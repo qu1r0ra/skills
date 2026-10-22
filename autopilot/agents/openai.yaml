@@ -1,0 +1,5 @@
+interface:
+  display_name: "Autopilot"
+  short_description: "Plan and hand off approved unattended runs"
+policy:
+  allow_implicit_invocation: false
