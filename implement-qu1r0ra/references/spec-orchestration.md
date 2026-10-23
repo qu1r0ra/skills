@@ -77,9 +77,10 @@ accepted-delivery rule.
   branches; final cleanup still requires accepted delivery.
 - If a held lane or dispatchable frontier remains when the orchestrator's turn
   ends, the monitor named in `.scratch/autopilot/<date>-runN/monitor-brief.md`
-  checks the thread and report hourly. It sends at most one resume message per
-  check when the thread is idle and work remains or the report has a held line;
-  T3 auto-resume is not a recovery guarantee.
+  follows the [autopilot monitor wake rules](../../autopilot/references/monitor.md#observation-and-wake-decisions)
+  for hourly observations, due retries and changed release evidence. An unchanged
+  owner gate does not warrant repeated resumes; T3 auto-resume is not a recovery
+  guarantee.
 
 Completion: the full task graph is integrated and verified, the integrated
 review and selected delivery gate are satisfied or named, and worker, delivery,
