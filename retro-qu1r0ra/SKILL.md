@@ -17,6 +17,8 @@ the active AIOS checkout root. The local CLI ranks friction signals and serves
 selected flagged excerpts after secret masking; its metadata-only unflagged
 sample does not expose excerpts. This path reviews selected evidence rather
 than the complete session corpus. Use the CLI's served excerpts only.
+Return to **Review proposals** below before recording candidate decisions or
+closing the local receipt, then resume the procedure's outcome steps.
 
 When neither scope is named, ask which path the user wants. Read the owning
 repository's privacy and evidence instructions before handling session data;
