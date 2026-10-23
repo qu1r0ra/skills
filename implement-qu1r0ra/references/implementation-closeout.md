@@ -74,10 +74,11 @@ recorded as unavailable.
 Follow the contract's deliver step (`docs/agents/implementation-contract.md`)
 and its lifecycle reference: push the feature branch, open the pull request
 to `main`, land through `implementation-preflight --for-landing` and
-`gh pr merge --squash --delete-branch` from the primary checkout, and record the
+`gh pr merge --squash` from the primary checkout, and record the
 merged PR, GitGuardian result, local check receipt, and merge SHA ancestry.
 Preserve the branch if publication fails; never force-push or bypass a
-repository rule.
+repository rule. Retire branches and worktrees separately through the
+contract's lifecycle and cleanup receipt procedure.
 
 Completion: the merged PR, GitGuardian result, local check receipt, and merge
 SHA ancestry are verified, or a named publication or human gate remains and the
