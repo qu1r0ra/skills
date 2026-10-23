@@ -14,6 +14,8 @@ Recommend the local skill that matches the user's request:
 - Engineering work that needs a Matt Pocock skill or flow: read
   [Ask Matt](../ask-matt/SKILL.md) for the route, then apply the wrapper
   substitutions below.
+- A plan or drafted spec to review before it is specified or ticketed: use
+  `/review-plan`.
 - A specification routed to `/to-spec`: use `/to-spec-qu1r0ra`; it applies
   the owning repository's contract and the central contract for AIOS work.
 - An approved design or specification ready for tickets in any repository:

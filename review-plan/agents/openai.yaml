@@ -1,0 +1,5 @@
+interface:
+  display_name: "Review Plan"
+  short_description: "Send a plan or spec to a reviewer before it ships"
+policy:
+  allow_implicit_invocation: false
