@@ -1,4 +1,4 @@
 interface:
   display_name: "Retro qu1r0ra"
-  short_description: "Run four-command coding-session triage"
-  default_prompt: "Use $retro-qu1r0ra for schedule-derived triage, masked excerpts, short-form candidate decisions, and the local receipt."
+  short_description: "Review coding retros before recommending follow-ups"
+  default_prompt: "Use $retro-qu1r0ra to review this coding session or scheduled triage and independently assess follow-ups before recommending them."
